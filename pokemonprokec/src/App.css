@@ -1,0 +1,158 @@
+
+.cardimg {
+    position: absolute;
+    left: 40vw;
+    top: 10vw;
+    width: calc(19vw);
+    height: calc(13vw);
+}
+.pokemon-card {
+    position: relative;
+    width: 100%;
+}
+
+.card {
+    position: absolute;
+    width: calc(20.5vw);
+    top: 8vw;
+    left: 40vw;
+    object-fit: contain;
+    z-index: 3;
+}
+
+.pokemon-info > h3{
+    position: absolute;
+    font-size: 1.7vw;
+    left: 45vw;
+    top: 7.3vw;
+    z-index: 10;
+}
+.pokemon-info > p{
+    position: relative;
+    top: 23vw;
+    left: 42vw;
+    width: 17vw;
+    font-size: 1vw;
+    z-index: 10;
+}
+
+.unclickable{
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    z-index: 2;
+}
+
+.cardButton {
+    transform: skew(-40deg);
+    border-radius: .3vw;
+    background-color: rebeccapurple;
+    color: white;
+    width: 8vw;
+    height: 2.4vw;
+    position: absolute;
+    top: 33.8vw;
+    left: 50.5vw;
+    z-index: 4;
+}
+.btn-text {
+    transform: skew(40deg);
+    font-size: 1.4vw;
+}
+.pokeholder{
+    width: 40%;
+    height: 1129px;
+}
+.mimipokedex {
+    position: absolute;
+    width: calc(7vw);
+    top: 45%;
+    left: 11%;
+    filter: brightness(0.0) saturate(0%);
+    z-index: 1;
+}
+.mimipokedexActive {
+    position: absolute;
+    width: calc(7vw);
+    top: 45%;
+    left: 11%;
+    z-index: 1;
+}
+.sablepokedex {
+    position: absolute;
+    width: calc(7vw);
+    top: 28%;
+    left: 9%;
+    filter: brightness(0.0) saturate(0%);
+    z-index: 1;
+}
+.sablepokedexActive {
+    position: absolute;
+    width: calc(7vw);
+    top: 28%;
+    left: 9%;
+    z-index: 1;
+}
+.background-container {
+    position: relative;
+    width: 65%;
+    height: 49vw;
+    overflow: hidden;
+}
+.backgroundimg {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    object-fit: fill;
+}
+.mimiimg {
+    position: absolute;
+    width: calc(4vw + 55px);
+    top: 8vw;
+    left: 8vw;
+    transition: transform .8s;
+}
+.mimiimg:hover {
+    transform: scale(1.2);
+}
+.sableimg {
+    position: absolute;
+    width: calc(4vw + 30px);
+    top: 30vw;
+    left: 50vw;
+    transition: transform .8s;
+}
+.sableimg:hover {
+    transform: scale(1.2);
+}
+.allimgs{
+    display: flex;
+}
+
+.pokedex-container {
+    position: relative;
+    width: 35%;
+    overflow: hidden;
+}
+
+.pokedeximg {
+    position: absolute;
+    height: 100%;
+    object-fit: contain;
+}
+
+.mimipoof {
+    z-index: 20;
+    width: calc(20vw);
+    position: absolute;
+    top: 7vw;
+    left: 1vw;
+}
+.sablepoof {
+    z-index: 20;
+    width: calc(20vw);
+    position: absolute;
+    top: 28vw;
+    left: 42vw;
+}
