@@ -5,12 +5,13 @@ import './App.css'
 import React from 'react';
 import sableye from "./imgs/Sableye.png";
 import mimikyuu from "./imgs/mimikyu.png";
-import background from "./imgs/pokemongrass.jpg";
+import background from "./imgs/bkgrd.jpg";
 import pokedeximg from "./imgs/pokedex.png";
 import PokemonCard from './Components/PokemonCard.jsx';
 import sablepokedex from './imgs/sablepokedex.png';
 import mimipokedex from './imgs/mimipokedex.jpg';
-import poof from './imgs/poof.webp';
+import poof from './imgs/poof.gif';
+
 
 function App() {
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -20,12 +21,13 @@ function App() {
     const [showSableButton, sableSetCard] = React.useState(false);
     const [showSablePoof, setSablePoof] = React.useState(false);
     const sableToggleButton = async () => {
-        sableSetShowbutton(!sableShowButton);
         setSablePoof(!showSablePoof);
+        await delay(1000);
+        sableSetShowbutton(!sableShowButton);
         setTimeout(() => {
             setSablePoof(showSablePoof);
-        }, 1200);
-        await delay(1200);
+        }, 1000);
+        await delay(1000);
         sableSetCard(!showSableButton);
     }
     const handleClickSableCard = () => {
@@ -38,12 +40,13 @@ function App() {
     const [showMimiButton, mimiSetCard] = React.useState(false);
     const [showMimiPoof, setMimiPoof] = React.useState(false);
     const mimiToggleButton = async () => {
-        mimiSetShowbutton(!mimiShowButton);
         setMimiPoof(!showMimiPoof);
+        await delay(1000);
+        mimiSetShowbutton(!mimiShowButton);
         setTimeout(() => {
             setMimiPoof(showMimiPoof);
-        }, 1200);
-        await delay(1200);
+        }, 1000);
+        await delay(1000);
         mimiSetCard(!showMimiButton);
     }
     const handleClickMimiCard = () => {
@@ -79,8 +82,11 @@ function App() {
     }
 
     return (
-        <>
-            <div className = "allimgs">
+        <div className="everything">
+            <div className="topText">
+                <img src='./src/imgs/findthatpokemon.png' className="topimage"></img>
+            </div>
+            <div className="allimgs">
                 <div className="background-container">
                     <img src={background} className = "backgroundimg"></img>
 
@@ -101,9 +107,8 @@ function App() {
                         {showMimiButton && <MimikyuuCard />}
                         {showMimiButton && <button className="cardButton" onClick={handleClickMimiCard}><div class="btn-text">Catch me!</div></button>}
                     </div>
-                </div>
 
- 
+                </div>
 
                 <div className="pokedex-container">
                     <img src={pokedeximg} className="pokedeximg"></img>
@@ -113,7 +118,7 @@ function App() {
                     {!showMimiPokex && <img src={mimipokedex} className="mimipokedexActive"></img>}
                 </div>
             </div>
-        </>
+        </div>
     );
 
 }

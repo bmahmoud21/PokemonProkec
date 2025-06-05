@@ -66,7 +66,7 @@
 }
 .mimipokedex {
     position: absolute;
-    width: calc(7vw);
+    width: calc(6vw);
     top: 45%;
     left: 11%;
     filter: brightness(0.0) saturate(0%);
@@ -74,7 +74,7 @@
 }
 .mimipokedexActive {
     position: absolute;
-    width: calc(7vw);
+    width: calc(6vw);
     top: 45%;
     left: 11%;
     z-index: 1;
@@ -82,7 +82,7 @@
 .sablepokedex {
     position: absolute;
     width: calc(7vw);
-    top: 28%;
+    top: 26%;
     left: 9%;
     filter: brightness(0.0) saturate(0%);
     z-index: 1;
@@ -90,38 +90,42 @@
 .sablepokedexActive {
     position: absolute;
     width: calc(7vw);
-    top: 28%;
+    top: 26%;
     left: 9%;
     z-index: 1;
 }
 .background-container {
     position: relative;
     width: 65%;
-    height: 49vw;
+    height: 41vw;
     overflow: hidden;
 }
 .backgroundimg {
     position: absolute;
     width: 100%;
-    height: auto;
+    height:100%;
     object-fit: fill;
+}
+.border {
+    position: absolute;
+    width: 65vw;
 }
 .mimiimg {
     position: absolute;
-    width: calc(4vw + 55px);
+    width: calc(5vw);
     top: 8vw;
     left: 8vw;
-    transition: transform .8s;
+    transition: transform 2s;
 }
 .mimiimg:hover {
     transform: scale(1.2);
 }
 .sableimg {
     position: absolute;
-    width: calc(4vw + 30px);
+    width: calc(4.5vw);
     top: 30vw;
     left: 50vw;
-    transition: transform .8s;
+    transition: transform 2s;
 }
 .sableimg:hover {
     transform: scale(1.2);
@@ -138,21 +142,39 @@
 
 .pokedeximg {
     position: absolute;
+    width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .mimipoof {
     z-index: 20;
     width: calc(20vw);
     position: absolute;
-    top: 7vw;
+    top: -2vw;
     left: 1vw;
 }
 .sablepoof {
     z-index: 20;
     width: calc(20vw);
     position: absolute;
-    top: 28vw;
-    left: 42vw;
+    top: 20vw;
+    left: 43vw;
+}
+.topText {
+    background-color: #ffcc01;
+    height: 7vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 4px solid black;
+}
+.everything{
+    border: .4vw ridge black;
+}
+.topimage{
+    position: absolute;
+    width: 50vw;
+    
 }
