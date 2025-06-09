@@ -1,4 +1,5 @@
-# PokemonProkec
+# PokemonProject
+
 
 My idea for the project
 -Interactive pokemon website
