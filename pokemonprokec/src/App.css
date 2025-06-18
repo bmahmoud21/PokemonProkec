@@ -1,9 +1,10 @@
 
-.topbutton{
+.topbutton {
     background-color: transparent;
     color: transparent;
     border: 0vw;
 }
+
 .cardimg {
     position: absolute;
     left: 40vw;
@@ -12,6 +13,7 @@
     height: calc(13vw);
     z-index: 2;
 }
+
 .card {
     position: absolute;
     width: calc(20.5vw);
@@ -25,14 +27,16 @@
     position: absolute;
     z-index: 14;
     left: 41.5vw;
-    font-size: .95vw;
-    width: 18vw;
+    font-size: .92vw;
+    width: 17.7vw;
     height: 9.5vw;
-    top: 22.5vw;
+    top: 22.3vw;
 }
-.pokemon-info{
+
+.pokemon-info {
     width: 2vw;
 }
+
 .pokemon-info > h3 {
     position: absolute;
     top: 7.4vw;
@@ -43,13 +47,14 @@
     contain-intrinsic-width: 7vw;
 }
 
-.unclickable{
+.unclickable {
     position: absolute;
     width: 100vw;
     height: 100vw;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
+
 .unclickablepoof {
     position: absolute;
     width: 200vw;
@@ -75,107 +80,36 @@
     transform: skew(40deg);
     font-size: 1.4vw;
 }
-.pokeholder{
+
+.pokeholder {
     width: 40%;
     height: 1129px;
 }
-.mimipokedex {
-    position: absolute;
-    width: calc(6vw);
-    top: 45%;
-    left: 11%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
+
+.pokemon-card-wrapper {
+    position: fixed;
+    top: 5vw;
+    left: 2vw;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
 }
-.mimipokedexActive {
-    position: absolute;
-    width: calc(6vw);
-    top: 45%;
-    left: 11%;
-    z-index: 1;
-}
-.Squirtlepokedex {
-    position: absolute;
-    width: calc(7vw);
-    top: 26%;
-    left: 9%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
-}
-.SquirtlepokedexActive {
-    position: absolute;
-    width: calc(7vw);
-    top: 26%;
-    left: 9%;
-    z-index: 1;
-}
-.background-container {
-    position: relative;
-    width: 65%;
-    height: 41vw;
-    overflow: hidden;
-}
-.backgroundimg {
-    position: absolute;
-    width: 100%;
-    height:100%;
-    object-fit: fill;
-}
+
 .border {
     position: absolute;
     width: 65vw;
 }
-.mimiimg {
-    position: absolute;
-    width: calc(5vw);
-    top: 8vw;
-    left: 8vw;
-    transition: transform 2s;
-}
-.mimiimg:hover {
-    transform: scale(1.2);
-}
-.Squirtleimg {
-    position: absolute;
-    width: calc(4.5vw);
-    top: 30vw;
-    left: 50vw;
-    transition: transform 2s;
-}
-.Squirtleimg:hover {
-    transform: scale(1.2);
-}
-.allimgs{
+
+.allimgs {
     display: flex;
 }
 
-.pokedex-container {
-    position: relative;
-    width: 35%;
-    overflow: hidden;
-}
 
-.pokedeximg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-}
-
-.mimipoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: -3.5vw;
-    left: 1vw;
-}
-.Squirtlepoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: 17vw;
-    left: 42vw;
-}
 .pokemonbinder {
     position: absolute;
     left: 85vw;
@@ -185,6 +119,7 @@
     border: .3vw ridge yellow;
     border-radius: .8vw;
 }
+
 .topText {
     background-color: #ffcc01;
     height: 7vw;
@@ -194,348 +129,111 @@
     align-items: center;
     border-bottom: 4px solid black;
 }
-.everything{
-    border: .4vw ridge black;
 
+.everything {
+    border: .4vw ridge black;
 }
-.topimage{
+
+.topimage {
     position: absolute;
     width: 50vw;
-    
 }
-.munchimg {
-    position: absolute;
-    width: calc(13vw);
-    top: 20vw;
-    left: 30vw;
-    transition: transform 2s;
+.background-container {
+    position: relative;
+    width: 65%;
+    height: 41vw;
+    overflow: hidden;
 }
 
-.munchimg:hover {
-    transform: scale(1.2);
-}
-.munchpokedex {
-    position: absolute;
-    width: calc(5vw);
-    top: 64.5%;
-    left: 12%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
+.backgroundimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.munchpokedexActive {
+.pokemon-container {
     position: absolute;
-    width: calc(5vw);
-    top: 64.5%;
-    left: 12%;
-    z-index: 1;
+    transition: transform 0.3s;
 }
-.munchpoof {
-    z-index: 20;
-    width: calc(20vw);
+.poof {
     position: absolute;
-    top: 11vw;
-    left: 26.5vw;
-}
-.soothe {
-    position: absolute;
-    z-index: 20;
-    width: calc(2.5vw);
-    top: 30vw;
-    left: 22vw;
-    transition: transform 2s;
-}
-.soothe:hover {
-    transform: scale(1.2);
-}
-.waterstone {
-    position: absolute;
-    width: calc(2.5vw);
-    top: 20vw;
-    left: 3vw;
-    transition: transform 2s;
-}
-.waterstone:hover{
-    transform:scale(1.2);
-}
-.snorlaximg {
-    position: absolute;
-    width: calc(10vw);
-    height: auto;
-    top: 10vw;
-    left: 40vw;
-    transition: transform 2s;
-}
-.snorlaximg:hover{
-    transform: scale(1.2);
-}
-.snorlaxpokedex {
-    position: absolute;
-    width: calc(8vw);
-    top: 64.5%;
-    left: 32.5%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
-}
-
-.snorlaxpokedexActive {
-    position: absolute;
-    width: calc(8vw);
-    top: 64.5%;
-    left: 32.5%;
-    z-index: 1;
-}
-.snorlaxpoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: -2.3vw;
-    left: 35.5vw;
-}
-.gigsnorlaximg {
-    position: absolute;
-    width: calc(7vw);
-    height: auto;
-    top: 15vw;
-    left: 10vw;
-    transition: transform 2s;
-}
-.gigsnorlaximg:hover{
-    transform: scale(1.2);
-}
-.gigsnorlaxpokedex {
-    position: absolute;
-    width: calc(8vw);
-    top: 61.5%;
-    left: 58.5%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
-}
-
-.gigsnorlaxpokedexActive {
-    position: absolute;
-    width: calc(8vw);
-    top: 61.5%;
-    left: 58.5%;
-    z-index: 1;
-}
-.gigsnorlaxpoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: 2vw;
-    left: 4vw;
-}
-.gigaband {
-    position: absolute;
-    z-index: 20;
-    width: calc(4vw);
-    top: 20vw;
-    left: 29vw;
-    transition: transform 2s;
-}
-
-.gigaband:hover {
-    transform: scale(1.2);
-}
-
-.snorlaxhint {
-    position: absolute;
-    width: 8.8vw;
-    height: 7.2vw;
-    top: 26.1vw;
-    left: 10.6vw;
-    background-color: black;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1.45vw;
-    font-size: 1.25vw;
-    color: white;
-    z-index: 20;
-}
-.gigahint {
-    position: absolute;
-    width: 9vw;
-    height: 7.2vw;
-    top: 26.1vw;
-    left: 19.5vw;
-    background-color: black;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1.8vw;
-    font-size: 1.25vw;
-    color: white;
-    z-index: 20;
-}
-
-.wartortleimg{
-    position: absolute;
-    width: calc(4.5vw);
-    top: 10vw;
-    left: 55vw;
-    transition: transform 2s;
-}
-.wartortleimg:hover {
-   transform: scale(1.2);
-}
-.wartortlepoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: -4vw;
-    left: 48vw;
-}
-.wartortlepokedex {
-    position: absolute;
-    width: 7vw;
-    top: 10.8vw;
-    left: 12vw;
-    filter: brightness(0.0) saturate(0%);
-}
-.wartortlepokedexActive {
-    position: absolute;
-    width: 7vw;
-    top: 10.8vw;
-    left: 12vw;
-    z-index: 1;
-}
-.wartortlehint {
-    position: absolute;
-    width: 9vw;
-    height: 7.5vw;
-    top: 10.4vw;
-    left: 10.6vw;
-    background-color: black;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1.8vw;
-    font-size: 1.25vw;
-    color: white;
-    z-index: 20;
-}
-.waterstoneblast {
-    position: absolute;
-    width: 2vw;
-    top: 28vw;
-    left: 55vw;
-    transition: transform 2s;
-}
-.waterstoneblast:hover{
-    transform: scale(1.2);
-}
-.Blastimg {
-    position: absolute;
-    width: 6vw;
-    top: 33vw;
-    left: 3vw;
-    transition: transform 2s;
-}
-.Blastimg:hover{
-    transform: scale(1.2);
-}
-.Blastpoof {
-    position: absolute;
+    top: 10%;
+    left: 55%;
     width: 20vw;
-    top: 15vw;
-    left: -2vw;
+    height: 20vw;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: 5;
+    pointer-events: none;
+    animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translate(-50%, -50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+    }
 }
 
-.blasthint {
-    position: absolute;
-    width: 9vw;
-    height: 7.5vw;
-    top: 10.5vw;
-    left: 19.4vw;
-    background-color: black;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1.8vw;
-    font-size: 1.25vw;
-    color: white;
-    z-index: 20;
+.button {
+    width: 6vw;
+    height: 6vw;
+    padding: 0;
+    background: none;
+    border: none;
 }
-.blastpokedex {
-    position: absolute;
-    width: 11vw;
-    top: 7.5vw;
-    left: 19vw;
-    filter: brightness(0.0) saturate(0%);
-}
-
-.blastpokedexActive {
-    position: absolute;
-    width: 11vw;
-    top: 7.5vw;
-    left: 19vw;
-    z-index: 1;
-}
-.sablepokedex {
-    position: absolute;
-    width: calc(8vw);
-    top: 44%;
-    left: 32%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
-}
-
-.sablepokedexActive {
-    position: absolute;
-    width: calc(8vw);
-    top: 44%;
-    left: 32%;
-    z-index: 1;
-}
-.sableimg {
-    position: absolute;
-    width: calc(5vw);
-    top: 21vw;
-    left: 26vw;
+.pokemon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transition: transform 2s;
 }
-
-.sableimg:hover {
-    transform: scale(1.2);
-}
-.sablepoof {
-    z-index: 20;
-    width: calc(20vw);
-    position: absolute;
-    top: 9vw;
-    left: 19vw;
-}
-.oshopokedex {
-    position: absolute;
-    width: calc(8vw);
-    top: 45%;
-    left: 60%;
-    filter: brightness(0.0) saturate(0%);
-    z-index: 1;
-}
-
-.oshopokedexActive {
-    position: absolute;
-    width: calc(8vw);
-    top: 45%;
-    left: 60%;
-    z-index: 1;
-}
-
-.oshoimg {
-    position: absolute;
-    width: calc(6vw);
-    top: 30vw;
-    left: 15vw;
-    transition: transform 2s;
-}
-
-.oshoimg:hover {
+.pokemon-img:hover{
     transform: scale(1.2);
 }
 
-.oshopoof {
-    z-index: 20;
-    width: calc(20vw);
+.pokedexInactive {
+    z-index: 5;
+    width: 7vw;
+    height: 7vw;
+    object-fit: contain;
+}
+.pokedexActive {
+    z-index: 5;
+    width: 7vw;
+    height: 7vw;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+}
+
+.pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.5vw, .5vw));
+    grid-row-gap: .6vw;
+    grid-column-gap: 1.3vw;
+    max-width: 100%;
+    margin: auto;
+    padding-top: 10.6vw;
+    padding-left: 3.2vw;
+    border: 2px solid blue;
+}
+
+.pokedex-container {
+    position: relative;
+    width: 35%; 
+    overflow: visible; 
+    margin: 0 auto;
+}
+
+
+.pokedeximg {
     position: absolute;
-    top: 16.5vw;
-    left: 8.3vw;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }
