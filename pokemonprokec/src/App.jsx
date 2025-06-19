@@ -9,6 +9,7 @@ import PokemonCard from './Components/PokemonCard.jsx';
 import poof from './imgs/poof.gif';
 import finished from './imgs/End.png'
 import pikachu from './imgs/pikachu.gif'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
 
     const [pokemonList, setPokemonList] = useState([]);
     const [uiStates, setUiStates] = useState({});
+    const allCaught = Object.values(uiStates).every(state => state.pokedex);
+
 
     useEffect(() => {
         fetch("http://localhost:5255/api/pokemon")
@@ -100,10 +103,23 @@ function App() {
 
     return (
         <div className="everything">
+
             {/*The top header, "Find That Pokemon"*/}
             <div className="topText">
                 <img src='./src/imgs/findthatpokemon.png' className="topimage"></img>
+                <Link to="/Binder">
+                    <button><img className="pokemonbinderimg" src='./imgs/pokemonbinder.png'></img></button>
+                </Link>
             </div>
+
+            {allCaught && (
+                <>
+                    <img className="pikachuleft" src={pikachu}></img> 
+                    <img className="pikachuright" src={pikachu}></img> 
+                    <img className="endtitle" src={finished}></img>
+                </>
+            )}
+
             {/*the background img for the pokemon finder section*/}
             <div className="allimgs">
                 <div className="background-container">
@@ -181,16 +197,6 @@ function App() {
 
                     </div>
 
-            {/*{!showOshoPokex && !showBlastPokex && !showGigSnorlaxPokex && !showMimiPokex && !showMunchPokex && !showSablePokex && !showSnorlaxPokex && !showSquirtlePokex && !showWartortlePokex &&*/}
-            {/*    <img className="endtitle" src={finished}></img>*/}
-            {/*}*/}
-
-            {/*{!showOshoPokex && !showBlastPokex && !showGigSnorlaxPokex && !showMimiPokex && !showMunchPokex && !showSablePokex && !showSnorlaxPokex && !showSquirtlePokex && !showWartortlePokex &&*/}
-            {/*    <img className="pikachuleft" src={pikachu}></img>*/}
-            {/*}*/}
-            {/*{!showOshoPokex && !showBlastPokex && !showGigSnorlaxPokex && !showMimiPokex && !showMunchPokex && !showSablePokex && !showSnorlaxPokex && !showSquirtlePokex && !showWartortlePokex &&*/}
-            {/*    <img className="pikachuright" src={pikachu}></img>*/}
-                    {/*    }*/}
             </div>
             </div>
         </div>
