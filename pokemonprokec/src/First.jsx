@@ -197,7 +197,6 @@ function Home() {
                 {/*Grass area where you select the pokemon*/}
                 <div className="pokemon-selection-container">
                     <p className="choose">You Have {selectedPokemon.length} Pokemon Selected Out Of 9</p>
-
                     <div className="pokemon-grid">
                         {pokemonList
                             .filter(p => !selectedPokemon.find(sp => sp.id === p.id))
@@ -219,6 +218,12 @@ function Home() {
                             </div>
                         ))}
                     </div>
+                    <button className="arrowbutton">
+                        <img className="rightButton" src='./src/imgs/Arrow.webp'></img>
+                    </button>
+                    <button className="arrowbutton">
+                        <img className="leftButton" src='./src/imgs/Arrow.webp'></img>
+                    </button>
                 </div>
                 {/*Showing the selected pokemon to the selected box*/}
                 <div className="selected">

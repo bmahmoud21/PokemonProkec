@@ -11,6 +11,7 @@ body {
     display: flex;
     flex-direction: row;
     background-color: #89c981;
+    overflow: hidden;
 }
 
 .header {
@@ -90,12 +91,12 @@ body {
 .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(4, 10.2vw);
-    grid-template-rows: repeat(3, 12vw);
+    grid-template-rows: repeat(3, 10.4vw);
     gap: 1vw;
     box-sizing: border-box;
 }
 .grass {
-    height: 41vw;
+    height: 42.4vw;
     width: 45.5vw;
 }
 .selected{
@@ -168,4 +169,28 @@ body {
 .choose {
     font-size: 1.3vw;
     font-weight: bold;
+}
+.rightButton {
+    position: absolute;
+    width: 5vw;
+    left: 39.2vw;
+    filter: brightness(80%);
+}
+.leftButton {
+    position: absolute;
+    width: 5vw;
+    transform: rotate(180deg);
+    filter: brightness(80%);
+}
+.rightButton:hover {
+    filter: brightness(100%);
+}
+.leftButton:hover {
+    filter: brightness(100%);
+}
+.arrowbutton{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    z-index: 0;
 }
