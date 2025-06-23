@@ -38,6 +38,10 @@ app.UseSwaggerUI();
 
 app.UseCors("AllowAll");
 
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapControllers();

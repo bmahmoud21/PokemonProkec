@@ -17,13 +17,18 @@ function App() {
 
     const [pokemonList, setPokemonList] = useState([]);
     const [uiStates, setUiStates] = useState({});
-    const allCaught = Object.values(uiStates).every(state => state.pokedex);
+    const allCaught = pokemonList.every(pokemon => uiStates[pokemon.name]?.pokedex);
 
 
     useEffect(() => {
+        const selectedFromStorage = JSON.parse(localStorage.getItem('selectedPokemon')) || [];
+
         fetch("http://localhost:5255/api/pokemon")
             .then((res) => res.json())
             .then((data) => {
+                const selectedIds = selectedFromStorage.map(p => p.id);
+                const filteredData = data.filter(p => selectedIds.includes(p.id));
+
                 const container = document.querySelector('.background-container');
                 const containerWidth = container?.offsetWidth || 400;
                 const containerHeight = container?.offsetHeight || 400;
@@ -53,7 +58,7 @@ function App() {
                     };
                 });
 
-                setPokemonList(data);
+                setPokemonList(filteredData);
                 setUiStates(initialUIState);
             })
             .catch((err) => console.error("Error fetching Pokemon:", err));
@@ -82,6 +87,7 @@ function App() {
                 showPoof: false,
                 showCard: true,
                 showButton: false,
+                isVisible: true,
             },
         }));
     }
@@ -134,25 +140,31 @@ function App() {
                         return (
                             <div key={pokemon.id} className={`pokemon-container ${pokemon.name}`} style={state.position || {}}>
                                 {state.showButton && (
-                                    <button
-                                        onClick={() => togglePokemon(pokemon.name)}
-                                        className="button"
-                                    >
-                                    {/*the pokemon buttons*/}
-                                        <img
-                                            src={pokemon.imageUrl}
-                                            alt={pokemon.name}
-                                            className="pokemon-img"
-                                        />
+                                    <>
+                                        <button
+                                            onClick={() => togglePokemon(pokemon.name)}
+                                            className="button"
+                                        >
+                                        {/*the pokemon buttons*/}
+                                            <img
+                                                src={`http://localhost:5255${pokemon.imageUrl}`}
+                                                alt={pokemon.name}
+                                                className="pokemon-img"
+                                            />
+                                        </button>
+                                    </>
 
-                                    </button>
+                                )}
+
+                                {/*makes page unclickable*/}
+                                {state.isVisible && (
+                                    <div className="unclickable"></div>
                                 )}
 
                                 {/*throwing the pokeball*/}
                                 {state.showPoof && (
                                     <>
                                         <img src={`${poof}?t=${Date.now()}`} className="poof" />
-                                        <div className="unclickable"></div>
                                     </>
                                 )}
 
@@ -166,7 +178,6 @@ function App() {
                                         >
                                             <div className="btn-text">Catch me!</div>
                                         </button>
-                                        <div className="unclickable"></div>
                                     </div>
                                 )}
                             </div>
@@ -189,7 +200,7 @@ function App() {
                             return (
                                 <img
                                     key={pokemon.id}
-                                    src={pokemon.pokedex}
+                                    src={`http://localhost:5255${pokemon.pokedex}`}
                                     className={state.pokedex ? "pokedexInactive" : "pokedexActive"}
                                 />
                             );

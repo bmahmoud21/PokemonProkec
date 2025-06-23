@@ -53,12 +53,16 @@
 }
 
 .unclickable {
-    position: absolute;
-    width: 100vw;
-    height: 100vw;
+    position: fixed;
     top: 0;
-    z-index: 3;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 3; 
+    pointer-events: all; 
 }
+
 
 .unclickablepoof {
     position: absolute;

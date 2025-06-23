@@ -27,27 +27,83 @@ body {
 }
 .input {
     width: 15%;
-    height: 41.6vw;
+    height: 42.4vw;
     background-color: #bdb5a6;
     border-right: .2vw solid black;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
 }
-.inputimg{
+.inputimg {
+    position: absolute;
+    top: 15vw;
+    z-index: 0;
+    pointer-events: none;
     width: 100%;
+    height: 30vw;
     opacity: 80%;
+}
+.inputButtons label {
+    font-weight: bold;
+}
+.input-text {
+    position: absolute;
+    top: 1vw;
+    font-size: 1.5vw;
+}
+.inputButtons {
+    margin-top: 4vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputButtons input {
+    padding: 8px;
+    width: 70%;
+}
+.addpokemon{
+    width: 50%;
 }
 .Text {
     font-weight: bold;
     font-variant: small-caps;
     font-size: 1.5vw;
 }
+.pokemon-selection-container {
+    position: absolute;
+    height: 41vw;
+    width: 45.5vw;
+    left: 15.5vw;
+}
+.pokemon-selection-img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 10.2vw);
+    grid-template-rows: repeat(3, 12vw);
+    gap: 1vw;
+    box-sizing: border-box;
+}
 .grass {
     height: 41vw;
     width: 45.5vw;
 }
-.headerimg{
+.selected{
+    position: absolute;
+    left: 63vw;
+    top: 17vw;
+}
+.headerimg {
     display: block;
     margin: auto;
 }
@@ -66,4 +122,50 @@ body {
 }
 .button{
     background-color: transparent;
+}
+.titleSelection{
+    position: absolute;
+    left: 69.5vw;
+    top: 9.5vw;
+    font-size: 2vw;
+}
+.selected-pokemon-preview {
+    position: absolute;
+    width: 33vw;
+    height: 28vw;
+    left: .5vw;
+    top: 1vw;
+}
+.selected-grid {
+    width: 33vw;
+    height: 28vw; 
+    display: grid;
+    grid-template-columns: repeat(3, 10.2vw); 
+    grid-template-rows: repeat(3, 8.5vw);
+    gap: 1vw;
+    box-sizing: border-box;
+}
+.selected-pokemon-preview{
+    font-size: 4vw;
+}
+.selected-pokemon-mini, .empty-slot{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.selected-mini-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.inputButtons {
+    padding-bottom: 5vw;
+    width: 100%;
+}
+.choose {
+    font-size: 1.3vw;
+    font-weight: bold;
 }

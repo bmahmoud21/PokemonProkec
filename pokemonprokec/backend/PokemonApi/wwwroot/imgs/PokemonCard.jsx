@@ -1,8 +1,9 @@
 function PokemonCard({ pokemon }) {
     return (
         <div className="pokemon-card">
-            <img src={`http://localhost:5255${pokemon.gifUrl}`} className="cardimg" alt={`${pokemon.name} gif`} />
-            <img src="./src/imgs/card.png" className="card" alt="card" />
+            <div className="holographic-wrapper">
+                <img src="./src/imgs/card.png" className="card"></img>
+            </div>
             <div className="pokemon-info">
                 <h3>{pokemon.name}</h3>
                 <div className="sum">
@@ -12,4 +13,5 @@ function PokemonCard({ pokemon }) {
         </div>
     );
 }
+
 export default PokemonCard;
