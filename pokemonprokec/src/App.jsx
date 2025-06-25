@@ -3,12 +3,12 @@
 //import viteLogo from '/vite.svg'
 import './App.css'
 import React, { useEffect, useState } from "react";
-import background from "./imgs/bkgrd.jpg";
-import pokedeximg from "./imgs/pokedex.png";
+import background from "/src/imgs/bkgrd.jpg";
+import pokedeximg from "/src/imgs/pokedex.png";
 import PokemonCard from './Components/PokemonCard.jsx';
-import poof from './imgs/poof.gif';
-import finished from './imgs/End.png'
-import pikachu from './imgs/pikachu.gif'
+import poof from '/src/imgs/poof.gif';
+import finished from '/src/imgs/End.png'
+import pikachu from '/src/imgs/pikachu.gif'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 
@@ -112,9 +112,9 @@ function App() {
 
             {/*The top header, "Find That Pokemon"*/}
             <div className="topText">
-                <img src='./src/imgs/findthatpokemon.png' className="topimage"></img>
+                <img src='/src/imgs/findthatpokemon.png' className="topimage"></img>
                 <Link to="/Binder">
-                    <button><img className="pokemonbinderimg" src='./imgs/pokemonbinder.png'></img></button>
+                    <button><img className="pokemonbinderimg" src='/src/imgs/pokemonbinder.png'></img></button>
                 </Link>
             </div>
 

@@ -10,12 +10,13 @@ namespace PokemonApi.Data
         }
 
         public DbSet<Pokemon> Pokemon { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserPokemon> UserPokemons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure Pokemon entity
             modelBuilder.Entity<Pokemon>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -27,7 +28,30 @@ namespace PokemonApi.Data
                 entity.HasIndex(e => e.Name).IsUnique();
             });
 
-            // Seed the database with initial Pokemon data
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(u => u.UserId);
+                entity.Property(u => u.Username).IsRequired().HasMaxLength(100);
+                entity.Property(u => u.PasswordHash).IsRequired();
+                entity.HasIndex(u => u.Username).IsUnique();
+            });
+
+            modelBuilder.Entity<UserPokemon>(entity =>
+            {
+                entity.ToTable("UserPokemon");
+                entity.HasKey(up => up.Id);
+
+                entity.HasOne(up => up.User)
+                      .WithMany(u => u.UserPokemons)
+                      .HasForeignKey(up => up.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(up => up.Pokemon)
+                      .WithMany()
+                      .HasForeignKey(up => up.PokemonId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
             SeedData.SeedPokemon(modelBuilder);
         }
     }

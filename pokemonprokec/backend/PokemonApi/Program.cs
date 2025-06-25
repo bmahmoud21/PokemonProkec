@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PokemonApi.Data;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;    
+using Microsoft.IdentityModel.Tokens;                   
+using System.Text;
+using PokemonApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +22,23 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+builder.Services.AddAuthorization();
+
 
 
 
@@ -41,6 +62,8 @@ app.UseCors("AllowAll");
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

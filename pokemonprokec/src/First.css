@@ -174,13 +174,13 @@ body {
     position: absolute;
     width: 5vw;
     left: 39.2vw;
-    filter: brightness(80%);
+    filter: brightness(90%);
+    transform: rotate(180deg);
 }
 .leftButton {
     position: absolute;
     width: 5vw;
-    transform: rotate(180deg);
-    filter: brightness(80%);
+    filter: brightness(90%);
 }
 .rightButton:hover {
     filter: brightness(100%);
@@ -194,3 +194,259 @@ body {
     position: absolute;
     z-index: 0;
 }
+
+
+
+
+.blurred {
+    filter: blur(0.3125vw); 
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+}
+
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border {
+    background-image: url('/src/imgs/ditto.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 2vw;
+    border-radius: 1vw;
+    border: 0.1vw solid #3c5aa6;
+    width: 20vw;
+    height: 25vw;
+    box-shadow: 0 0vw 5vw #3c5aa6;
+}
+
+.login-input {
+    color: #CC0000;
+    background: transparent;
+    border: none;
+    width: 85%;
+    padding: 1.2vw 1.3vw;
+    font-family: monospace, serif;
+    font-size: 1.3vw;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+}
+
+    .login-input::placeholder {
+        color: black;
+
+    }
+
+
+
+
+.signup {
+    font-size: 2vw;
+    text-align: center;
+    margin-top: .1vw;
+}
+
+
+
+.userpw {
+    padding-top: 1vw;
+}
+
+
+.block-cube {
+    position: relative;
+    margin-bottom: .2vw;
+    opacity: 70%;
+}
+
+    .block-cube .bg,
+    .block-cube .bg-top,
+    .block-cube .bg-right {
+        background: grey;
+        transition: background 0.2s ease-in-out;
+    }
+
+    .block-cube .bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+        .block-cube .bg .bg-inner {
+            background: #f9f1f1;
+            position: absolute;
+            top: 0.2vw;
+            bottom: 0.2vw;
+            left: 0.2vw;
+            right: 0.2vw;
+            transition: all 0.2s ease-in-out;
+        }
+
+    .block-cube .bg-top {
+        position: absolute;
+        height: 0.8vw;
+        bottom: 100%;
+        left: 0.4vw;
+        right: -0.4vw;
+        transform: skew(-45deg, 0);
+    }
+
+        .block-cube .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+    .block-cube .bg-right {
+        position: absolute;
+        top: -0.4vw;
+        bottom: 0.4vw;
+        width: 0.8vw;
+        left: 100%;
+        transform: skew(0, -45deg);
+        z-index: 0;
+    }
+
+        .block-cube .bg-right .bg-inner {
+            left: 0;
+        }
+
+    .block-cube.block-input input:focus ~ .bg .bg-inner,
+    .block-cube.block-input input:focus ~ .bg-top .bg-inner,
+    .block-cube.block-input input:focus ~ .bg-right .bg-inner {
+        top: 100%;
+        background: #FF0000;
+    }
+
+    .block-cube.block-input:hover .bg,
+    .block-cube.block-input:hover .bg-top,
+    .block-cube.block-input:hover .bg-right {
+        background: #FF0000;
+    }
+
+    .block-cube.block-cube-hover:hover .bg .bg-inner,
+    .block-cube.block-cube-hover:focus .bg .bg-inner {
+        top: 100%;
+    }
+
+    .block-cube .text {
+        position: relative;
+        z-index: 2;
+    }
+
+
+
+
+
+
+.input-buttons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vw;
+    gap: .2vw;
+    opacity: 70%;
+}
+
+    .input-buttons button {
+        position: relative;
+        background: transparent;
+        border: none;
+        height: 3.4vw;
+        width: 100%;
+        padding: 1.2vw 1.3vw;
+        font-family: monospace, serif;
+        font-size: 1.3vw;
+        align-content: center;
+        letter-spacing: 0.05em;
+        color: grey;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .input-buttons button .text {
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .input-buttons button .bg,
+    .input-buttons button .bg-top,
+    .input-buttons button .bg-right {
+        position: absolute;
+        background: grey;
+        transition: background 0.2s ease-in-out;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .input-buttons button .bg {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+        .input-buttons button .bg .bg-inner {
+            position: absolute;
+            top: 0.2vw;
+            bottom: 0.2vw;
+            left: 0.2vw;
+            right: 0.2vw;
+            background: #f9f1f1;
+            transition: all 0.2s ease-in-out;
+        }
+
+    .input-buttons button .bg-top {
+        height: 0.8vw;
+        bottom: 100%;
+        left: 0.4vw;
+        right: -0.4vw;
+        transform: skew(-45deg, 0);
+    }
+
+        .input-buttons button .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+    .input-buttons button .bg-right {
+        top: -0.4vw;
+        bottom: 0.4vw;
+        width: 0.8vw;
+        left: 100%;
+        transform: skew(0, -45deg);
+    }
+
+        .input-buttons button .bg-right .bg-inner {
+            left: 0;
+        }
+
+    .input-buttons button:hover .bg,
+    .input-buttons button:hover .bg-top,
+    .input-buttons button:hover .bg-right {
+        background: #FF0000;
+    }
+
+        .input-buttons button:hover .bg .bg-inner {
+            top: 100%;
+        }
+
+    .input-buttons button:focus .bg,
+    .input-buttons button:focus .bg-top,
+    .input-buttons button:focus .bg-right {
+        background: grey;
+    }
+
+        .input-buttons button:focus .bg .bg-inner {
+            top: 0;
+        }

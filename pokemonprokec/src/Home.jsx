@@ -21,16 +21,16 @@ function Home() {
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <img src ='./src/imgs/binderimg.png'></img>
+                        <img src ='/src/imgs/binderimg.png'></img>
                     </div>
                     <div class="back">
-                        <img src='./src/imgs/binderimg.png'></img>
+                        <img src='/src/imgs/binderimg.png'></img>
                     </div>
                 </div>
             </div>
             <div class="trapezoid-container-two"></div>
             <Link to="/FindThatPokemon">
-                <button className="homebutton"><img className= "homebuttonimg" src = './src/imgs/Home.png'></img></button>
+                <button className="homebutton"><img className= "homebuttonimg" src = '/src/imgs/Home.png'></img></button>
             </Link>
         </div>
     );
