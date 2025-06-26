@@ -16,12 +16,14 @@
     <None Remove="backend\.env" />
     <None Remove="backend\package-lock.json" />
     <None Remove="backend\package.json" />
+    <None Remove="backend\PokemonApi\Data\AppDbContext.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250616174509_InitialCreate.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250616174509_InitialCreate.Designer.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250625175159_SyncWithDatabase.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250625175159_SyncWithDatabase.Designer.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250625180046_FixUserPokemonTableName.cs" />
     <None Remove="backend\PokemonApi\Migrations\20250625180046_FixUserPokemonTableName.Designer.cs" />
+    <None Remove="backend\PokemonApi\Models\UserSelectionDto.cs" />
     <None Remove="backend\PokemonApi\server.js" />
     <None Remove="src\sableeyecard.gif" />
   </ItemGroup>

@@ -19,7 +19,7 @@ public class UserPokemonController : ControllerBase
     }
 
     [HttpPost("select")]
-    public async Task<IActionResult> SelectPokemon([FromBody] UserSelectionDto selection)
+    public async Task<IActionResult> SelectPokemon([FromBody] PokemonSelectionDto selection)
     {
         if (!_context.Users.Any(u => u.UserId == selection.UserId))
             return NotFound("User not found");
