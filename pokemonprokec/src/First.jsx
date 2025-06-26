@@ -5,6 +5,11 @@ import './First.css'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 function Home() {
+    //all pokemon or just not used
+    const [isUsed, setIsUsed] = useState(false);
+    const [usedPokemonIds, setUsedPokemonIds] = useState(new Set());
+
+
     //for log in
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState("");
@@ -43,10 +48,12 @@ function Home() {
                 const message = await res.text();
                 alert(message); 
             } else {
-                const userId = await res.json();
-                localStorage.setItem("userId", userId);
-                setUserId(userId);
+                const result = await res.json();
+                localStorage.setItem("userId", result.userId);
+                localStorage.setItem("token", result.token); 
+                setUserId(result.userId);
                 setIsAuthenticated(true);
+
             }
 
         } catch (err) {
@@ -55,37 +62,68 @@ function Home() {
         }
     };
 
-    useEffect(() => {
-        // Clear userId & token on every page load (refresh)
-        localStorage.removeItem("userId");
-        localStorage.removeItem("token");
+    const loginUser = async (username, password) => {
+        try {
+            const response = await fetch("http://localhost:5255/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
 
-        setIsAuthenticated(false);
-        setUserId(null);
-    }, []);
+            const result = await response.json();
+
+            if (!response.ok) throw new Error(result.message || "Login failed");
+
+            localStorage.setItem("token", result.token);
+            localStorage.setItem("userId", result.userId);  // Store in localStorage
+            setUserId(result.userId);  // Store in state too
+            setIsAuthenticated(true);
+
+            return true;
+        } catch (error) {
+            console.error("Login error:", error);
+            return false;
+        }
+    };
+
+
+
+    //useEffect(() => {
+    //    // Clear userId & token on every page load (refresh)
+    //    localStorage.removeItem("userId");
+    //    localStorage.removeItem("token");
+
+    //    setIsAuthenticated(false);
+    //    setUserId(null);
+    //}, []);
 
 
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        const savedUserId = localStorage.getItem("userId");
 
-        if (isAuthenticated && savedUserId && token) {
-            fetch(`http://localhost:5255/api/userpokemon/selected/${savedUserId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+        // Prevent running the fetch if userId is undefined
+        if (!isAuthenticated || !userId || !token) return;
+
+        fetch(`http://localhost:5255/api/userpokemon/selected/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to fetch saved Pokémon");
+                return res.json();
             })
-                .then(res => {
-                    if (!res.ok) throw new Error("Failed to fetch saved Pokémon");
-                    return res.json();
-                })
-                .then(data => {
-                    setSelectedPokemon(data);
-                })
-                .catch(err => console.error("Error loading saved Pokémon:", err));
-        }
-    }, [isAuthenticated]);
+            .then(data => {
+                setSelectedPokemon(data);
+                const usedIds = new Set(data.map(p => p.id));
+                setUsedPokemonIds(usedIds);
+            })
+            .catch(err => console.error("Error loading saved Pokémon:", err));
+    }, [isAuthenticated, userId]); // ← Always include both here
+
 
 
 
@@ -359,6 +397,12 @@ function Home() {
                         <img className="buttonimg" src='/src/imgs/Ready.png' />
                     </button>
                 </div>
+
+                {/*button to choose used or all*/}
+                <button className="used" onClick={() => setIsUsed(prev => !prev)}>
+                    {isUsed ? "Show All Pokemon" : "Show only unused"}
+                </button>
+
                 {/*Input Buttons*/}
                 <div className="firstEverything">
                     <div className="input">
@@ -389,8 +433,11 @@ function Home() {
                         <p className="choose">You Have {selectedPokemon.length} Pokemon Selected Out Of 9</p>
                         <div className="pokemon-grid">
                             {pokemonList
-                                .filter(p => !selectedPokemon.find(sp => sp.id === p.id))
-                                .map((pokemon) => (
+                                .filter(pokemon => {
+                                    const wasUsed = usedPokemonIds.has(pokemon.id);
+                                    return isUsed ? !wasUsed : true;
+                                })
+                                .map(pokemon => (
                                 <div
                                     key={pokemon.id}
                                     className={`pokemon-selection-card ${selectedPokemon.find(p => p.id === pokemon.id) ? 'selected' : ''

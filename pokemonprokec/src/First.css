@@ -450,3 +450,27 @@ body {
         .input-buttons button:focus .bg .bg-inner {
             top: 0;
         }
+
+
+.used {
+    position: absolute;
+    z-index: 5;
+    left: 55vw;
+    top: 7.5vw;
+    height: 4vw;
+    width: 5vw;
+    border-radius: 1vw;
+    background-color: #29a8dc;
+    filter: brightness(120%);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.used:hover {
+    transform: scale(1.05);
+}
+
+
