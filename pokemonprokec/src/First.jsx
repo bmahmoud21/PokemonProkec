@@ -3,23 +3,25 @@ import './Home.css'
 import './App.jsx'
 import './First.css'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import UploadPokemon from "./Components/UploadPokemon";
 
 function Home() {
     //all pokemon or just not used
     const [isUsed, setIsUsed] = useState(false);
     const [usedPokemonIds, setUsedPokemonIds] = useState(new Set());
 
-
     //for log in
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isGuest, setIsGuest] = useState(false);
-
+    const [showRegister, setShowRegister] = useState(false);
 
     const [userId, setUserId] = useState(null);
 
-    const handleLoginOrSignup = async (action = "login") => {
+    const handleLoginOrSignup = async (action = "login", username, password) => {
         if (!username.trim() || !password.trim()) {
             alert("Username and password are required.");
             return;
@@ -53,7 +55,6 @@ function Home() {
                 localStorage.setItem("token", result.token); 
                 setUserId(result.userId);
                 setIsAuthenticated(true);
-
             }
 
         } catch (err) {
@@ -88,19 +89,6 @@ function Home() {
         }
     };
 
-
-
-    //useEffect(() => {
-    //    // Clear userId & token on every page load (refresh)
-    //    localStorage.removeItem("userId");
-    //    localStorage.removeItem("token");
-
-    //    setIsAuthenticated(false);
-    //    setUserId(null);
-    //}, []);
-
-
-
     useEffect(() => {
         const token = localStorage.getItem("token");
 
@@ -124,12 +112,12 @@ function Home() {
             .catch(err => console.error("Error loading saved Pokémon:", err));
     }, [isAuthenticated, userId]); // ← Always include both here
 
-
-
-
     const [pokemonList, setPokemonList] = useState([]);
     const [selectedPokemon, setSelectedPokemon] = useState([]);
     const navigate = useNavigate();
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const pageSize = 12;
 
     useEffect(() => {
         fetch("http://localhost:5255/api/pokemon")
@@ -139,6 +127,10 @@ function Home() {
             })
             .catch((err) => console.error("Error fetching Pokemon:", err));
     }, []);
+
+    const filteredPokemon = pokemonList.filter(pokemon => isUsed ? !usedPokemonIds.has(pokemon.id) : true);
+    const paginatedPokemon = filteredPokemon.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+    const maxPage = Math.ceil(filteredPokemon.length / pageSize) - 1;
 
     //only nine pokemon allowed to be chosen
     const handlePokemonSelect = (pokemon) => {
@@ -152,6 +144,9 @@ function Home() {
     //can only hit the ready button when nine are chosen
     const handleStartGame = async () => {
         if (selectedPokemon.length !== 9) return;
+
+        // Save selected Pokémon for both guests and logged-in users
+        localStorage.setItem("selectedPokemon", JSON.stringify(selectedPokemon));
 
         if (isGuest) {
             navigate('/FindThatPokemon');
@@ -169,14 +164,14 @@ function Home() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    userId: parseInt(userId),           
-                    pokemonIds: selectedPokemon.map(p => p.id),  
+                    userId: parseInt(userId),
+                    pokemonIds: selectedPokemon.map(p => p.id),
                 }),
             });
 
             if (!res.ok) throw new Error("Failed to save selection");
 
-            localStorage.setItem("selectedPokemon", JSON.stringify(selectedPokemon));
+            // Already saved above
             navigate('/FindThatPokemon');
 
         } catch (err) {
@@ -184,9 +179,6 @@ function Home() {
             alert("Unable to save your selection.");
         }
     };
-
-
-
 
     //getting the images
     const [imageFile, setImageFile] = useState(null);
@@ -200,7 +192,6 @@ function Home() {
         gifUrl: "",
         pokedex: "",
     });
-
 
     const handleImageFileChange = (e) => {
         setImageFile(e.target.files[0]);
@@ -239,7 +230,6 @@ function Home() {
                 const uploadedUrl = await res.text();
                 console.log("Uploaded to:", uploadedUrl);
                 uploadedImageUrl = uploadedUrl;  
-
             }
 
             if (gifFile) {
@@ -256,7 +246,6 @@ function Home() {
                 }
                 uploadedGifUrl = await uploadRes.text();
             }
-
 
             if (pokedexFile) {
                 console.log("Uploading Pokedex file:", pokedexFile.name, pokedexFile.type, pokedexFile.size);
@@ -284,8 +273,6 @@ function Home() {
                 alert("You must fill out all fields before submitting!");
                 return;
             }
-
-
 
             const pokemonData = {
                 ...newPokemon,
@@ -316,7 +303,6 @@ function Home() {
         }
     };
 
-
     const handleInput = (e) => {
         const { name, value } = e.target;
         setNewPokemon(prev => ({
@@ -328,70 +314,40 @@ function Home() {
     return (
         <>
             {!isAuthenticated && (
-                <div className = "login-overlay">
+                <div className="login-overlay">
                     <div className="border">
                         <h3 className="signup">Sign Up or Log In</h3>
                         <div className="userpw">
-                            <div className="block-cube block-input">
-                                <input
-                                    type="text"
-                                    placeholder="Enter Username"
-                                    className="login-input"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                            {showRegister ? (
+                                <Register
+                                    onRegister={(username, password) =>
+                                        handleLoginOrSignup("register", username, password)
+                                    }
+                                    onSwitchToLogin={() => setShowRegister(false)}
+                                    onGuest={() => {
+                                        setIsAuthenticated(true);
+                                        setIsGuest(true);
+                                    }}
                                 />
-                                <span className="bg"><span className="bg-inner"></span></span>
-                                <span className="bg bg-top"><span className="bg-inner"></span></span>
-                                <span className="bg bg-right"><span className="bg-inner"></span></span>
-                            </div>
-
-                            <div className="block-cube block-input">
-                                <input
-                                  type="password"
-                                  placeholder="Enter Password"
-                                  className="login-input"
-                                  value={password}
-                                  onChange={(e) => setPassword(e.target.value)}
+                            ) : (
+                                <Login
+                                    onLogin={(username, password) =>
+                                        handleLoginOrSignup("login", username, password)
+                                    }
+                                    onSwitchToRegister={() => setShowRegister(true)}
+                                    onGuest={() => {
+                                        setIsAuthenticated(true);
+                                        setIsGuest(true);
+                                    }}
                                 />
-                                <span className="bg"><span className="bg-inner"></span></span>
-                                <span className="bg bg-top"><span className="bg-inner"></span></span>
-                                <span className="bg bg-right"><span className="bg-inner"></span></span>
-                                </div>
-                        </div>
-
-                        <div className="input-buttons">
-                            <button onClick={() => handleLoginOrSignup("login")}>
-                                <span className="text">Login</span>
-                                <span className="bg"><span className="bg-inner" /></span>
-                                <span className="bg bg-top"><span className="bg-inner" /></span>
-                                <span className="bg bg-right"><span className="bg-inner" /></span>
-                            </button>
-
-                            <button onClick={() => handleLoginOrSignup("register")}>
-                                <span className="text">Sign Up</span>
-                                <span className="bg"><span className="bg-inner" /></span>
-                                <span className="bg bg-top"><span className="bg-inner" /></span>
-                                <span className="bg bg-right"><span className="bg-inner" /></span>
-                            </button>
-
-                            <button onClick={() => {
-                                setIsAuthenticated(true);
-                                setIsGuest(true);
-                            }}>
-                                <span className="text">Continue as Guest</span>
-                                <span className="bg"><span className="bg-inner" /></span>
-                                <span className="bg bg-top"><span className="bg-inner" /></span>
-                                <span className="bg bg-right"><span className="bg-inner" /></span>
-
-                            </button>
+                            )}
                         </div>
                     </div>
                 </div>
             )}
 
             <div className={isAuthenticated ? "" : "blurred"}>
-
-                <div className ="header">
+                <div className="header">
                     <img className="headerimg" src='/src/imgs/FirstHeader.png'></img>
                     <button className="button" onClick={handleStartGame} disabled={selectedPokemon.length !== 9}>
                         <img className="buttonimg" src='/src/imgs/Ready.png' />
@@ -405,61 +361,51 @@ function Home() {
 
                 {/*Input Buttons*/}
                 <div className="firstEverything">
-                    <div className="input">
-                        <img className="inputimg" src='./src/imgs/inputimg.jpg'></img>
-                        <div className="inputButtons">
-                            <div className="input-text">Input Your Pokemon!</div>
-
-                            <label htmlFor="name">Name:</label>
-                            <input type="text" id="name" name="name" value={newPokemon.name} onChange={handleInput} />
-
-                            <label htmlFor="summary">Summary:</label>
-                            <input type="text" id="summary" name="summary" value={newPokemon.summary} onChange={handleInput} />
-
-                            <label htmlFor="image">Standing Pokemon GIF:</label>
-                            <input type="file" id="image" accept="image/*" onChange={handleImageFileChange} />
-
-                            <label htmlFor="gif">Card GIF:</label>
-                            <input type="file" id="gif" accept="image/gif" onChange={handleGifFileChange} />
-
-                            <label htmlFor="pokedex">Pokedex Image:</label>
-                            <input type="file" id="pokedex" accept="image/*" onChange={handlePokedexFileChange} />
-
-                            <button className="addpokemon" onClick={handleAddPokemon}>Finished!</button>
-                        </div>
-                    </div>
+                    <UploadPokemon
+                        onAddPokemon={handleAddPokemon}
+                        newPokemon={newPokemon}
+                        setNewPokemon={setNewPokemon}
+                        imageFile={imageFile}
+                        setImageFile={setImageFile}
+                        gifFile={gifFile}
+                        setGifFile={setGifFile}
+                        pokedexFile={pokedexFile}
+                        setPokedexFile={setPokedexFile}
+                    />
                     {/*Grass area where you select the pokemon*/}
                     <div className="pokemon-selection-container">
                         <p className="choose">You Have {selectedPokemon.length} Pokemon Selected Out Of 9</p>
                         <div className="pokemon-grid">
-                            {pokemonList
-                                .filter(pokemon => {
-                                    const wasUsed = usedPokemonIds.has(pokemon.id);
-                                    return isUsed ? !wasUsed : true;
-                                })
-                                .map(pokemon => (
+                            {paginatedPokemon.map(pokemon => (
                                 <div
                                     key={pokemon.id}
-                                    className={`pokemon-selection-card ${selectedPokemon.find(p => p.id === pokemon.id) ? 'selected' : ''
-                                        }`}
+                                    className={`pokemon-selection-card ${selectedPokemon.find(p => p.id === pokemon.id) ? 'selected' : ''}`}
                                     onClick={() => handlePokemonSelect(pokemon)}
                                 >
                                     <img
-                                        src={`http://localhost:5255${pokemon.imageUrl}`}
+                                        src={
+                                            pokemon.imageUrl.startsWith('http')
+                                                ? pokemon.imageUrl
+                                                : `http://localhost:5255${pokemon.imageUrl}`
+                                        }
                                         alt={pokemon.name}
                                         className="pokemon-selection-img"
                                     />
-                                    {selectedPokemon.find(p => p.id === pokemon.id) && (
-                                        <div className="selection-indicator">✓</div>
-                                    )}
                                 </div>
                             ))}
                         </div>
-                        <button className="arrowbutton">
-                            <img className="rightButton" src='./src/imgs/Arrow.png'></img>
+                        <button
+                            className="arrowbutton left"
+                            onClick={() => setCurrentPage(p => Math.max(0, p - 1))}
+                            disabled={currentPage === 0}
+                        >
+                            <img className="leftButton" src='./src/imgs/Arrow.png' alt="Previous" />
                         </button>
-                        <button className="arrowbutton">
-                            <img className="leftButton" src='./src/imgs/Arrow.png'></img>
+                        <button
+                            className="arrowbutton right"
+                            onClick={() => setCurrentPage(p => Math.min(maxPage, p + 1))}
+                        >
+                            <img className="rightButton" src='./src/imgs/Arrow.png' alt="Next" />
                         </button>
                     </div>
                     {/*Showing the selected pokemon to the selected box*/}
@@ -481,12 +427,11 @@ function Home() {
                     {/*images*/}
                     <img className="grass" src='./src/imgs/claw.png'></img>
                     <img className="box" src='./src/imgs/box.png'></img>
-                    <h3 className = "titleSelection">Your Selected Pokemon</h3>
+                    <h3 className="titleSelection">Your Selected Pokemon</h3>
                 </div>
             </div>
         </>
     );
-
 }
 
 export default Home;

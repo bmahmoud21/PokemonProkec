@@ -234,13 +234,14 @@ body {
     color: #CC0000;
     background: transparent;
     border: none;
-    width: 85%;
+    width: 100%;
     padding: 1.2vw 1.3vw;
     font-family: monospace, serif;
     font-size: 1.3vw;
     letter-spacing: 0.05em;
     position: relative;
     z-index: 2;
+    box-sizing: border-box;
 }
 
     .login-input::placeholder {
@@ -260,12 +261,16 @@ body {
 
 
 .userpw {
-    padding-top: 1vw;
+    padding-top: 0vw;
 }
 
+.userpw .block-cube.block-input:nth-child(2) {
+    margin-bottom: 2vw; 
+}
 
 .block-cube {
     position: relative;
+    width: 100%;
     margin-bottom: .2vw;
     opacity: 70%;
 }
@@ -344,11 +349,6 @@ body {
         position: relative;
         z-index: 2;
     }
-
-
-
-
-
 
 .input-buttons {
     display: flex;
@@ -472,5 +472,6 @@ body {
 .used:hover {
     transform: scale(1.05);
 }
+
 
 
