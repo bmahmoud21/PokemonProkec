@@ -1,0 +1,476 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.border{
+    width: 99.5%;
+    height: 98.9%;
+    border: .3vw solid black;
+}
+.firstEverything {
+    display: flex;
+    flex-direction: row;
+    background-color: #89c981;
+    overflow: hidden;
+}
+
+.header {
+    position: relative;
+    background-color: #ffcc01;
+    display: flex;
+    align-items: center;
+    border-bottom: .2vw solid black;
+    height: 7vw;
+
+}
+.headerimg{
+    width: 50vw;
+}
+.input {
+    width: 15%;
+    height: 42.4vw;
+    background-color: #bdb5a6;
+    border-right: .2vw solid black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.inputimg {
+    position: absolute;
+    top: 15vw;
+    z-index: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 30vw;
+    opacity: 80%;
+}
+.inputButtons label {
+    font-weight: bold;
+}
+.input-text {
+    position: absolute;
+    top: 1vw;
+    font-size: 1.5vw;
+}
+.inputButtons {
+    margin-top: 4vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputButtons input {
+    padding: 8px;
+    width: 70%;
+}
+.addpokemon{
+    width: 50%;
+}
+.Text {
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 1.5vw;
+}
+.pokemon-selection-container {
+    position: absolute;
+    height: 41vw;
+    width: 45.5vw;
+    left: 15.5vw;
+}
+.pokemon-selection-img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 10.2vw);
+    grid-template-rows: repeat(3, 10.4vw);
+    gap: 1vw;
+    box-sizing: border-box;
+}
+.grass {
+    height: 42.4vw;
+    width: 45.5vw;
+}
+.selected{
+    position: absolute;
+    left: 63vw;
+    top: 17vw;
+}
+.headerimg {
+    display: block;
+    margin: auto;
+}
+.box{
+    width: 40vw;
+    margin-left: auto;
+}
+.buttonimg {
+    position: absolute;
+    left: 85vw;
+    width: 10vw;
+    height: auto;
+    top: 1vw;
+    border: .2vw solid black;
+    border-radius: 1vw;
+}
+.button{
+    background-color: transparent;
+}
+.titleSelection{
+    position: absolute;
+    left: 69.5vw;
+    top: 9.5vw;
+    font-size: 2vw;
+}
+.selected-pokemon-preview {
+    position: absolute;
+    width: 33vw;
+    height: 28vw;
+    left: .5vw;
+    top: 1vw;
+}
+.selected-grid {
+    width: 33vw;
+    height: 28vw; 
+    display: grid;
+    grid-template-columns: repeat(3, 10.2vw); 
+    grid-template-rows: repeat(3, 8.5vw);
+    gap: 1vw;
+    box-sizing: border-box;
+}
+.selected-pokemon-preview{
+    font-size: 4vw;
+}
+.selected-pokemon-mini, .empty-slot{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.selected-mini-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.inputButtons {
+    padding-bottom: 5vw;
+    width: 100%;
+}
+.choose {
+    font-size: 1.3vw;
+    font-weight: bold;
+}
+.rightButton {
+    position: absolute;
+    width: 5vw;
+    left: 39.2vw;
+    filter: brightness(90%);
+    transform: rotate(180deg);
+}
+.leftButton {
+    position: absolute;
+    width: 5vw;
+    filter: brightness(90%);
+}
+.rightButton:hover {
+    filter: brightness(100%);
+}
+.leftButton:hover {
+    filter: brightness(100%);
+}
+.arrowbutton{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    z-index: 0;
+}
+
+
+
+
+.blurred {
+    filter: blur(0.3125vw); 
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+}
+
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border {
+    background-image: url('/src/imgs/ditto.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 2vw;
+    border-radius: 1vw;
+    border: 0.1vw solid #3c5aa6;
+    width: 20vw;
+    height: 25vw;
+    box-shadow: 0 0vw 5vw #3c5aa6;
+}
+
+.login-input {
+    color: #CC0000;
+    background: transparent;
+    border: none;
+    width: 85%;
+    padding: 1.2vw 1.3vw;
+    font-family: monospace, serif;
+    font-size: 1.3vw;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+}
+
+    .login-input::placeholder {
+        color: black;
+
+    }
+
+
+
+
+.signup {
+    font-size: 2vw;
+    text-align: center;
+    margin-top: .1vw;
+}
+
+
+
+.userpw {
+    padding-top: 1vw;
+}
+
+
+.block-cube {
+    position: relative;
+    margin-bottom: .2vw;
+    opacity: 70%;
+}
+
+    .block-cube .bg,
+    .block-cube .bg-top,
+    .block-cube .bg-right {
+        background: grey;
+        transition: background 0.2s ease-in-out;
+    }
+
+    .block-cube .bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+        .block-cube .bg .bg-inner {
+            background: #f9f1f1;
+            position: absolute;
+            top: 0.2vw;
+            bottom: 0.2vw;
+            left: 0.2vw;
+            right: 0.2vw;
+            transition: all 0.2s ease-in-out;
+        }
+
+    .block-cube .bg-top {
+        position: absolute;
+        height: 0.8vw;
+        bottom: 100%;
+        left: 0.4vw;
+        right: -0.4vw;
+        transform: skew(-45deg, 0);
+    }
+
+        .block-cube .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+    .block-cube .bg-right {
+        position: absolute;
+        top: -0.4vw;
+        bottom: 0.4vw;
+        width: 0.8vw;
+        left: 100%;
+        transform: skew(0, -45deg);
+        z-index: 0;
+    }
+
+        .block-cube .bg-right .bg-inner {
+            left: 0;
+        }
+
+    .block-cube.block-input input:focus ~ .bg .bg-inner,
+    .block-cube.block-input input:focus ~ .bg-top .bg-inner,
+    .block-cube.block-input input:focus ~ .bg-right .bg-inner {
+        top: 100%;
+        background: #FF0000;
+    }
+
+    .block-cube.block-input:hover .bg,
+    .block-cube.block-input:hover .bg-top,
+    .block-cube.block-input:hover .bg-right {
+        background: #FF0000;
+    }
+
+    .block-cube.block-cube-hover:hover .bg .bg-inner,
+    .block-cube.block-cube-hover:focus .bg .bg-inner {
+        top: 100%;
+    }
+
+    .block-cube .text {
+        position: relative;
+        z-index: 2;
+    }
+
+
+
+
+
+
+.input-buttons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vw;
+    gap: .2vw;
+    opacity: 70%;
+}
+
+    .input-buttons button {
+        position: relative;
+        background: transparent;
+        border: none;
+        height: 3.4vw;
+        width: 100%;
+        padding: 1.2vw 1.3vw;
+        font-family: monospace, serif;
+        font-size: 1.3vw;
+        align-content: center;
+        letter-spacing: 0.05em;
+        color: grey;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .input-buttons button .text {
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .input-buttons button .bg,
+    .input-buttons button .bg-top,
+    .input-buttons button .bg-right {
+        position: absolute;
+        background: grey;
+        transition: background 0.2s ease-in-out;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .input-buttons button .bg {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+        .input-buttons button .bg .bg-inner {
+            position: absolute;
+            top: 0.2vw;
+            bottom: 0.2vw;
+            left: 0.2vw;
+            right: 0.2vw;
+            background: #f9f1f1;
+            transition: all 0.2s ease-in-out;
+        }
+
+    .input-buttons button .bg-top {
+        height: 0.8vw;
+        bottom: 100%;
+        left: 0.4vw;
+        right: -0.4vw;
+        transform: skew(-45deg, 0);
+    }
+
+        .input-buttons button .bg-top .bg-inner {
+            bottom: 0;
+        }
+
+    .input-buttons button .bg-right {
+        top: -0.4vw;
+        bottom: 0.4vw;
+        width: 0.8vw;
+        left: 100%;
+        transform: skew(0, -45deg);
+    }
+
+        .input-buttons button .bg-right .bg-inner {
+            left: 0;
+        }
+
+    .input-buttons button:hover .bg,
+    .input-buttons button:hover .bg-top,
+    .input-buttons button:hover .bg-right {
+        background: #FF0000;
+    }
+
+        .input-buttons button:hover .bg .bg-inner {
+            top: 100%;
+        }
+
+    .input-buttons button:focus .bg,
+    .input-buttons button:focus .bg-top,
+    .input-buttons button:focus .bg-right {
+        background: grey;
+    }
+
+        .input-buttons button:focus .bg .bg-inner {
+            top: 0;
+        }
+
+
+.used {
+    position: absolute;
+    z-index: 5;
+    left: 55vw;
+    top: 7.5vw;
+    height: 4vw;
+    width: 5vw;
+    border-radius: 1vw;
+    background-color: #29a8dc;
+    filter: brightness(120%);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.used:hover {
+    transform: scale(1.05);
+}
+
+
