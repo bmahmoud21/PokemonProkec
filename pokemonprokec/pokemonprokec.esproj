@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.2752196">
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.2752196">
   <PropertyGroup>
     <StartupCommand>npm run dev</StartupCommand>
     <JavaScriptTestRoot>src\</JavaScriptTestRoot>
@@ -8,20 +8,4 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="backend\PokemonApi\wwwroot\uploads\**" />
-    <TypeScriptConfiguration Remove="backend\PokemonApi\wwwroot\uploads\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="backend\.env" />
-    <None Remove="backend\package-lock.json" />
-    <None Remove="backend\package.json" />
-    <None Remove="backend\PokemonApi\Migrations\20250616174509_InitialCreate.cs" />
-    <None Remove="backend\PokemonApi\Migrations\20250616174509_InitialCreate.Designer.cs" />
-    <None Remove="backend\PokemonApi\Migrations\20250625175159_SyncWithDatabase.cs" />
-    <None Remove="backend\PokemonApi\Migrations\20250625175159_SyncWithDatabase.Designer.cs" />
-    <None Remove="backend\PokemonApi\Migrations\20250625180046_FixUserPokemonTableName.cs" />
-    <None Remove="backend\PokemonApi\Migrations\20250625180046_FixUserPokemonTableName.Designer.cs" />
-    <None Remove="backend\PokemonApi\server.js" />
-  </ItemGroup>
 </Project>
