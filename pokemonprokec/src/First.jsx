@@ -14,8 +14,6 @@ function Home() {
 
     //for log in
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [isGuest, setIsGuest] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
@@ -63,32 +61,6 @@ function Home() {
         }
     };
 
-    const loginUser = async (username, password) => {
-        try {
-            const response = await fetch("http://localhost:5255/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, password }),
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) throw new Error(result.message || "Login failed");
-
-            localStorage.setItem("token", result.token);
-            localStorage.setItem("userId", result.userId);  // Store in localStorage
-            setUserId(result.userId);  // Store in state too
-            setIsAuthenticated(true);
-
-            return true;
-        } catch (error) {
-            console.error("Login error:", error);
-            return false;
-        }
-    };
-
     useEffect(() => {
         const token = localStorage.getItem("token");
 
@@ -110,12 +82,14 @@ function Home() {
                 setUsedPokemonIds(usedIds);
             })
             .catch(err => console.error("Error loading saved Pokémon:", err));
-    }, [isAuthenticated, userId]); // ← Always include both here
+    }, [isAuthenticated, userId]); 
+
 
     const [pokemonList, setPokemonList] = useState([]);
     const [selectedPokemon, setSelectedPokemon] = useState([]);
     const navigate = useNavigate();
 
+    //only show 12 at a time on each page
     const [currentPage, setCurrentPage] = useState(0);
     const pageSize = 12;
 
@@ -145,7 +119,7 @@ function Home() {
     const handleStartGame = async () => {
         if (selectedPokemon.length !== 9) return;
 
-        // Save selected Pokémon for both guests and logged-in users
+        // Save selected Pokemon for both guests and logged-in users
         localStorage.setItem("selectedPokemon", JSON.stringify(selectedPokemon));
 
         if (isGuest) {
@@ -178,137 +152,6 @@ function Home() {
             console.error(err);
             alert("Unable to save your selection.");
         }
-    };
-
-    //getting the images
-    const [imageFile, setImageFile] = useState(null);
-    const [gifFile, setGifFile] = useState(null);
-    const [pokedexFile, setPokedexFile] = useState(null);
-
-    const [newPokemon, setNewPokemon] = useState({
-        name: "",
-        summary: "",
-        imageUrl: "",
-        gifUrl: "",
-        pokedex: "",
-    });
-
-    const handleImageFileChange = (e) => {
-        setImageFile(e.target.files[0]);
-    };
-
-    const handleGifFileChange = (e) => {
-        setGifFile(e.target.files[0]);
-    };
-
-    const handlePokedexFileChange = (e) => {
-        setPokedexFile(e.target.files[0]);
-    };
-
-    const handleAddPokemon = async () => {
-        let uploadedImageUrl = newPokemon.imageUrl;
-        let uploadedGifUrl = newPokemon.gifUrl;
-        let uploadedPokedexUrl = newPokemon.pokedex;
-
-        try {
-            if (imageFile) {
-                console.log("Uploading file:", imageFile.name, imageFile.type, imageFile.size);
-                const formData = new FormData();
-                formData.append("file", imageFile); 
-
-                const res = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-
-                if (!res.ok) {
-                    const errorText = await res.text();
-                    console.error("Upload failed:", errorText);
-                    throw new Error("Image upload failed");
-                }
-
-                const uploadedUrl = await res.text();
-                console.log("Uploaded to:", uploadedUrl);
-                uploadedImageUrl = uploadedUrl;  
-            }
-
-            if (gifFile) {
-                console.log("Uploading GIF file:", gifFile.name, gifFile.type, gifFile.size);
-                const formData = new FormData();
-                formData.append("file", gifFile);
-                const uploadRes = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                if (!uploadRes.ok) {
-                    const errorText = await uploadRes.text();
-                    throw new Error(`GIF upload failed: ${errorText}`);
-                }
-                uploadedGifUrl = await uploadRes.text();
-            }
-
-            if (pokedexFile) {
-                console.log("Uploading Pokedex file:", pokedexFile.name, pokedexFile.type, pokedexFile.size);
-                const formData = new FormData();
-                formData.append("file", pokedexFile);
-                const uploadRes = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                if (!uploadRes.ok) {
-                    const errorText = await uploadRes.text();
-                    throw new Error(`Pokedex upload failed: ${errorText}`);
-                }
-                uploadedPokedexUrl = await uploadRes.text();
-            }
-
-            //makes inputs required
-            if (
-                !newPokemon.name.trim() ||
-                !newPokemon.summary.trim() ||
-                !imageFile ||
-                !gifFile ||
-                !pokedexFile
-            ) {
-                alert("You must fill out all fields before submitting!");
-                return;
-            }
-
-            const pokemonData = {
-                ...newPokemon,
-                imageUrl: uploadedImageUrl,
-                gifUrl: uploadedGifUrl,
-                pokedex: uploadedPokedexUrl,
-            };
-
-            const res = await fetch("http://localhost:5255/api/pokemon", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(pokemonData),
-            });
-
-            if (!res.ok) throw new Error("Failed to add Pokémon");
-
-            const data = await res.json();
-
-            setPokemonList(prevList => [...prevList, data]);
-            setNewPokemon({ name: "", summary: "", imageUrl: "", gifUrl: "", pokedex: "" });
-            setImageFile(null);
-            setGifFile(null);
-            setPokedexFile(null);
-
-        } catch (error) {
-            console.error(error);
-            alert(error.message);
-        }
-    };
-
-    const handleInput = (e) => {
-        const { name, value } = e.target;
-        setNewPokemon(prev => ({
-            ...prev,
-            [name]: value,
-        }));
     };
 
     return (
@@ -359,19 +202,9 @@ function Home() {
                     {isUsed ? "Show All Pokemon" : "Show only unused"}
                 </button>
 
-                {/*Input Buttons*/}
                 <div className="firstEverything">
-                    <UploadPokemon
-                        onAddPokemon={handleAddPokemon}
-                        newPokemon={newPokemon}
-                        setNewPokemon={setNewPokemon}
-                        imageFile={imageFile}
-                        setImageFile={setImageFile}
-                        gifFile={gifFile}
-                        setGifFile={setGifFile}
-                        pokedexFile={pokedexFile}
-                        setPokedexFile={setPokedexFile}
-                    />
+                {/*uploading pokemon*/}
+                    <UploadPokemon onPokemonAdded={pokemon => setPokemonList(prevList => [...prevList, pokemon])} />
                     {/*Grass area where you select the pokemon*/}
                     <div className="pokemon-selection-container">
                         <p className="choose">You Have {selectedPokemon.length} Pokemon Selected Out Of 9</p>
