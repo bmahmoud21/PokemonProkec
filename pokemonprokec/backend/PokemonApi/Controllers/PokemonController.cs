@@ -67,20 +67,20 @@ namespace PokemonApi.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded");
 
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            var imgsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imgs");
 
-            if (!Directory.Exists(uploadsFolder))
-                Directory.CreateDirectory(uploadsFolder);
+            if (!Directory.Exists(imgsFolder))
+                Directory.CreateDirectory(imgsFolder);
 
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadsFolder, fileName);
+            var filePath = Path.Combine(imgsFolder, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            var relativeUrl = $"/uploads/{fileName}";
+            var relativeUrl = $"/imgs/{fileName}";
             return Ok(relativeUrl);
         }
 

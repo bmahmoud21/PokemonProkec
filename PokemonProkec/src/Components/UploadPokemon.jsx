@@ -45,10 +45,7 @@ function UploadPokemon({ onPokemonAdded }) {
             if (imageFile) {
                 const formData = new FormData();
                 formData.append("file", imageFile);
-                const res = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
+                const res = await fetch("http://localhost:5255/api/pokemon/upload", { method: "POST", body: formData });
                 if (!res.ok) throw new Error("Image upload failed");
                 uploadedImageUrl = await res.text();
             }
@@ -57,10 +54,7 @@ function UploadPokemon({ onPokemonAdded }) {
             if (gifFile) {
                 const formData = new FormData();
                 formData.append("file", gifFile);
-                const res = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
+                const res = await fetch("http://localhost:5255/api/pokemon/upload", { method: "POST", body: formData });
                 if (!res.ok) throw new Error("GIF upload failed");
                 uploadedGifUrl = await res.text();
             }
@@ -69,10 +63,7 @@ function UploadPokemon({ onPokemonAdded }) {
             if (pokedexFile) {
                 const formData = new FormData();
                 formData.append("file", pokedexFile);
-                const res = await fetch("http://localhost:5255/api/pokemon/upload", {
-                    method: "POST",
-                    body: formData,
-                });
+                const res = await fetch("http://localhost:5255/api/pokemon/upload", { method: "POST", body: formData });
                 if (!res.ok) throw new Error("Pokedex upload failed");
                 uploadedPokedexUrl = await res.text();
             }
@@ -86,8 +77,8 @@ function UploadPokemon({ onPokemonAdded }) {
 
             const res = await fetch("http://localhost:5255/api/pokemon", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(pokemonData),
+                headers: { "Content-Type": "application/json" }
             });
 
             if (!res.ok) throw new Error("Failed to add Pokémon");
