@@ -17,7 +17,7 @@ function Home() {
     const [isGuest, setIsGuest] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
-    const [userId, setUserId] = useState(null);
+    const [userId, setUserId] = useState(() => localStorage.getItem("userId"));
 
     const handleLoginOrSignup = async (action = "login", username, password) => {
         if (!username.trim() || !password.trim()) {
@@ -49,9 +49,17 @@ function Home() {
                 alert(message); 
             } else {
                 const result = await res.json();
-                localStorage.setItem("userId", result.userId);
-                localStorage.setItem("token", result.token); 
-                setUserId(result.userId);
+                let userId, token;
+                if (typeof result === "number") {
+                    userId = result;
+                    token = null;
+                } else {
+                    userId = result.userId;
+                    token = result.token;
+                }
+                localStorage.setItem("userId", userId);
+                localStorage.setItem("token", token);
+                setUserId(userId);
                 setIsAuthenticated(true);
             }
 
@@ -77,7 +85,7 @@ function Home() {
                 return res.json();
             })
             .then(data => {
-                setSelectedPokemon(data);
+                setSelectedPokemon([]);
                 const usedIds = new Set(data.map(p => p.id));
                 setUsedPokemonIds(usedIds);
             })

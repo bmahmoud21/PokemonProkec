@@ -24,12 +24,19 @@ public class UserPokemonController : ControllerBase
         if (!_context.Users.Any(u => u.UserId == selection.UserId))
             return NotFound("User not found");
 
-        var existing = _context.UserPokemons.Where(up => up.UserId == selection.UserId);
-        _context.UserPokemons.RemoveRange(existing);
+        // Get all Pokémon the user has already used
+        var existingPokemonIds = _context.UserPokemons
+            .Where(up => up.UserId == selection.UserId)
+            .Select(up => up.PokemonId)
+            .ToHashSet();
 
+        // Add only new Pokémon that haven't been used before
         foreach (var pid in selection.PokemonIds)
         {
-            _context.UserPokemons.Add(new UserPokemon { UserId = selection.UserId, PokemonId = pid });
+            if (!existingPokemonIds.Contains(pid))
+            {
+                _context.UserPokemons.Add(new UserPokemon { UserId = selection.UserId, PokemonId = pid });
+            }
         }
 
         await _context.SaveChangesAsync();
