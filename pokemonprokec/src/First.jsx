@@ -102,15 +102,22 @@ function Home() {
     const pageSize = 12;
 
     useEffect(() => {
-        fetch("http://localhost:5255/api/pokemon")
+        if (!isAuthenticated || !userId) return;
+
+        const url = isUsed
+            ? `http://localhost:5255/api/pokemon/unused/${userId}`
+            : "http://localhost:5255/api/pokemon";
+
+        fetch(url)
             .then((res) => res.json())
             .then((data) => {
                 setPokemonList(data);
+                setCurrentPage(0); // Optionally reset to first page on toggle
             })
             .catch((err) => console.error("Error fetching Pokemon:", err));
-    }, []);
+    }, [isUsed, isAuthenticated, userId]);
 
-    const filteredPokemon = pokemonList.filter(pokemon => isUsed ? !usedPokemonIds.has(pokemon.id) : true);
+    const filteredPokemon = pokemonList;
     const paginatedPokemon = filteredPokemon.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
     const maxPage = Math.ceil(filteredPokemon.length / pageSize) - 1;
 
@@ -206,9 +213,11 @@ function Home() {
                 </div>
 
                 {/*button to choose used or all*/}
-                <button className="used" onClick={() => setIsUsed(prev => !prev)}>
-                    {isUsed ? "Show All Pokemon" : "Show only unused"}
-                </button>
+                {!isGuest && (
+                    <button className="used" onClick={() => setIsUsed(prev => !prev)}>
+                        {isUsed ? "Show All Pokemon" : "Show only unused"}
+                    </button>
+                )}
 
                 <div className="firstEverything">
                 {/*uploading pokemon*/}

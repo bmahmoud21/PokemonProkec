@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PokemonApi.Data;
 using PokemonApi.Models;
+using PokemonApi.Services;
 
 namespace PokemonApi.Controllers
 {
@@ -10,27 +9,24 @@ namespace PokemonApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly PokemonContext _context;
+        private readonly AuthService _authService;
 
-        public AuthController(PokemonContext context)
+        public AuthController(AuthService authService)
         {
-            _context = context;
+            _authService = authService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDto dto)
         {
-            if (_context.Users.Any(u => u.Username == dto.Username))
-                return BadRequest("Username already exists.");
-
             var user = new User
             {
-                Username = dto.Username,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                Username = dto.Username
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var result = await _authService.RegisterAsync(user, dto.Password);
+            if (result == null)
+                return BadRequest("Username already exists.");
 
             return Ok("Registration successful");
         }
@@ -38,8 +34,8 @@ namespace PokemonApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserDto dto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == dto.Username);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+            var user = await _authService.LoginAsync(dto.Username, dto.Password);
+            if (user == null)
                 return Unauthorized("Invalid credentials");
 
             return Ok(user.UserId);

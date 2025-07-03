@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;                   
 using System.Text;
 using PokemonApi.Data;
+using PokemonApi.Repositories;
+using PokemonApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +41,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 
-
-
+builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+builder.Services.AddScoped<IUserPokemonRepository, UserPokemonRepository>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<PokemonService>();
+builder.Services.AddScoped<UserPokemonService>();
+builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
