@@ -23,7 +23,6 @@ namespace PokemonApi.Repositories
 
         public async Task<User> RegisterAsync(User user, string password)
         {
-            // Hash password (implement your own hashing logic)
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

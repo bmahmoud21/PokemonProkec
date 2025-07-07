@@ -18,7 +18,6 @@ public class UserPokemonController : ControllerBase
     [HttpPost("select")]
     public async Task<IActionResult> SelectPokemon([FromBody] PokemonSelectionDto selection)
     {
-        // Add each selected Pokemon for the user
         foreach (var pid in selection.PokemonIds)
         {
             var userPokemon = new UserPokemon { UserId = selection.UserId, PokemonId = pid };

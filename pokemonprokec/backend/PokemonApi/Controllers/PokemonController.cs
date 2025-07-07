@@ -29,7 +29,6 @@ namespace PokemonApi.Controllers
             _pokemonRepository = pokemonRepository;
         }
 
-        // GET: api/pokemon
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pokemon>>> GetPokemon()
         {
@@ -37,7 +36,6 @@ namespace PokemonApi.Controllers
             return Ok(pokemons);
         }
 
-        // GET: api/pokemon/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Pokemon>> GetPokemon(int id)
         {
@@ -47,7 +45,6 @@ namespace PokemonApi.Controllers
             return Ok(pokemon);
         }
 
-        // GET: api/pokemon/name/pikachu
         [HttpGet("name/{name}")]
         public async Task<ActionResult<Pokemon>> GetPokemonByName(string name)
         {
@@ -57,7 +54,6 @@ namespace PokemonApi.Controllers
             return Ok(pokemon);
         }
 
-        // GET: api/pokemon/unused/{userId}
         [HttpGet("unused/{userId}")]
         public async Task<ActionResult<IEnumerable<Pokemon>>> GetUnusedPokemons(int userId)
         {
@@ -68,7 +64,6 @@ namespace PokemonApi.Controllers
             return Ok(unused);
         }
 
-        // POST: api/pokemon/upload
         [HttpPost("upload")]
         public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
         {
@@ -92,7 +87,6 @@ namespace PokemonApi.Controllers
             return Ok(relativeUrl);
         }
 
-        // POST: api/pokemon
         [HttpPost]
         public async Task<ActionResult<Pokemon>> PostPokemon(Pokemon pokemon)
         {
@@ -100,7 +94,6 @@ namespace PokemonApi.Controllers
             return CreatedAtAction("GetPokemon", new { id = created.Id }, created);
         }
 
-        // PUT: api/pokemon/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPokemon(int id, Pokemon pokemon)
         {
@@ -114,7 +107,6 @@ namespace PokemonApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/pokemon/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePokemon(int id)
         {
