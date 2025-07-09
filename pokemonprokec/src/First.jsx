@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
-import './Home.css'
+import './Binder.css'
 import './App.jsx'
 import './First.css'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';

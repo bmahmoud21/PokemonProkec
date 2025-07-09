@@ -8,7 +8,7 @@ body {
     position: relative;
     perspective: 10vw; 
     top: 4vw;
-    left: 7vw;
+    left: 2vw;
     perspective-origin: 50% 0; 
 }
     .trapezoid-container::after {
@@ -21,8 +21,8 @@ body {
         background: url('./src/imgs/binderimg.webp') 50%/ cover;
         transform-origin: 50% 100%;
         transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-        border-top: .5vw solid black;
-        border-left: .3vw solid black;
+        border-top: .8vw solid black;
+        border-left: .6vw solid black;
         border-bottom: .15vw solid black;
     }
 
@@ -31,8 +31,8 @@ body {
     aspect-ratio: 1;
     position: absolute;
     perspective: 10vw;
-    top: 4.45vw;
-    left: 47.6vw;
+    top: 4vw;
+    left: 42.5vw;
     perspective-origin: 50% 0;
 }
     .trapezoid-container-two::after {
@@ -45,8 +45,8 @@ body {
         background: url('./src/imgs/binderimg.webp') 50%/ cover;
         transform-origin: 50% 100%;
         transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-        border-top: .5vw solid black;
-        border-right: .3vw solid black;
+        border-top: .8vw solid black;
+        border-right: .6vw solid black;
         border-bottom: .15vw solid black;
     }
 
@@ -73,125 +73,230 @@ body {
     left: 43.8vw;
     top: .5vw;
 }
-.boxes1 {
+.boxes7 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 50vw;
+    left: 45vw;
     top: 5vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
-.boxes2 {
+.boxes8 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 62.5vw;
+    left: 57.5vw;
     top: 5.9vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes9 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 70vw;
+    top: 6.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes1 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 5vw;
+    top: 6.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes2 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 17.5vw;
+    top: 5.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
 .boxes3 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 75vw;
-    top: 6.9vw;
-    perspective-origin: 50% 0;
-    transform-origin: 50% 100%;
-    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-
-.boxes4 {
-    position: absolute;
-    opacity: .5;
-    z-index: 20;
-    background-color: black;
-    width: 10vw;
-    height: 15vw;
-    left: 10vw;
-    top: 6.9vw;
-    perspective-origin: 50% 0;
-    transform-origin: 50% 100%;
-    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-
-.boxes5 {
-    position: absolute;
-    opacity: .5;
-    z-index: 20;
-    background-color: black;
-    width: 10vw;
-    height: 15vw;
-    left: 22.5vw;
-    top: 5.9vw;
-    perspective-origin: 50% 0;
-    transform-origin: 50% 100%;
-    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-
-.boxes6 {
-    position: absolute;
-    opacity: .5;
-    z-index: 20;
-    background-color: black;
-    width: 10vw;
-    height: 15vw;
-    left: 35vw;
+    left: 30vw;
     top: 4.9vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
-.boxes7 {
+.boxes4 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 10vw;
+    left: 5vw;
     top: 26.9vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
-
-.boxes8 {
+.boxes5 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 22.5vw;
+    left: 17.5vw;
     top: 25.9vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
-
-.boxes9 {
+.boxes6 {
     position: absolute;
-    opacity: .5;
     z-index: 20;
-    background-color: black;
+    background-color: rgba(0,0,0,0.5);
     width: 10vw;
     height: 15vw;
-    left: 35vw;
+    left: 30vw;
     top: 24.9vw;
     perspective-origin: 50% 0;
     transform-origin: 50% 100%;
     transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
+.boxes10 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 45vw;
+    top: 24.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes11 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 57.5vw;
+    top: 25.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes12 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 70vw;
+    top: 26.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+
+.previous{
+    width: 5vw;
+    position: absolute;
+    top: 1.5vw;
+    transform: rotate(-5deg);
+    left: 2.5vw;
+}
+.next{
+    position: absolute;
+    width: 5vw;
+    transform: rotate(185deg);
+    top: 1.5vw;
+    left: 77.5vw;
+}
+
+.binder-card-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+    left: 0vw;
+    top: 0vw;
+}
+
+
+    .binder-card-wrapper .sum {
+        overflow: hidden;
+        left: .8vw;
+        top: 7.4vw;
+        font-size: .45vw;
+        max-width: 8.7vw;
+    }
+
+    .binder-card-wrapper .pokemon-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start; 
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .binder-card-wrapper .cardimg {
+        align-self: center;
+        height: 30vw !important;   
+        width: 100% !important;
+        object-fit: contain;
+        display: block;
+        position: absolute;
+        top: -10.5vw;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .binder-card-wrapper .card {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .binder-card-wrapper .pokemonname {
+        font-size: 10vw;
+        color: #fff;
+        text-align: center;
+        z-index: 10;
+        position: relative;
+        margin: 0.2vw 0 0.1vw 0;
+        text-shadow: 0 0 0.3vw #000, 0 0 0.5vw #000;
+    }

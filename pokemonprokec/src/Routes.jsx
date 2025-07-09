@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';     
-import Home from './Home.jsx';   
+import Home from './Binder.jsx';   
 import First from './First.jsx'
 
 function Main() {

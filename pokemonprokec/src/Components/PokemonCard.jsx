@@ -4,7 +4,7 @@ function PokemonCard({ pokemon }) {
             <img src={`http://localhost:5255${pokemon.gifUrl}`} className="cardimg" alt={`${pokemon.name} gif`} />
             <img src="./src/imgs/card.png" className="card" alt="card" />
             <div className="pokemon-info">
-                <h3>{pokemon.name}</h3>
+                <h3 className = "pokemonname">{pokemon.name}</h3>
                 <div className="sum">
                     <p>{pokemon.summary}</p>
                 </div>
