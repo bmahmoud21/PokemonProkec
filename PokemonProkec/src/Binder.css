@@ -1,0 +1,390 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.trapezoid-container {
+    width: 40vw;
+    aspect-ratio: 1; 
+    position: relative;
+    perspective: 10vw; 
+    top: 4vw;
+    left: 2vw;
+    perspective-origin: 50% 0; 
+}
+    .trapezoid-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./src/imgs/binderimg.webp') 50%/ cover;
+        transform-origin: 50% 100%;
+        transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        border-top: .8vw solid black;
+        border-left: .6vw solid black;
+        border-bottom: .15vw solid black;
+    }
+
+.trapezoid-container-two {
+    width: 40vw;
+    aspect-ratio: 1;
+    position: absolute;
+    perspective: 10vw;
+    top: 4vw;
+    left: 42.5vw;
+    perspective-origin: 50% 0;
+}
+    .trapezoid-container-two::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./src/imgs/binderimg.webp') 50%/ cover;
+        transform-origin: 50% 100%;
+        transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        border-top: .8vw solid black;
+        border-right: .6vw solid black;
+        border-bottom: .15vw solid black;
+    }
+
+
+.background {
+    background-color: #ffcc01;
+    width: 100%;
+    height: 48.4vw;
+}
+.homebutton{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    width: 10vw;
+    left: 44.8vw;
+    top: .5vw;
+}
+.homebuttonimg {
+    background-color: transparent;
+    border: .2vw solid black;
+    border-radius: 1vw;
+    position: absolute;
+    width: 10vw;
+    left: 43.8vw;
+    top: .5vw;
+}
+.boxes7 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 45vw;
+    top: 5vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes8 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 57.5vw;
+    top: 5.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes9 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 70vw;
+    top: 6.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes1 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 5vw;
+    top: 6.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes2 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 17.5vw;
+    top: 5.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes3 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 30vw;
+    top: 4.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes4 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 5vw;
+    top: 26.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes5 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 17.5vw;
+    top: 25.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes6 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 30vw;
+    top: 24.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, -.07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes10 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 45vw;
+    top: 24.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes11 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 57.5vw;
+    top: 25.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.boxes12 {
+    position: absolute;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    width: 10vw;
+    height: 15vw;
+    left: 70vw;
+    top: 26.9vw;
+    perspective-origin: 50% 0;
+    transform-origin: 50% 100%;
+    transform: matrix3d(1, .07, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+
+.previous{
+    width: 5vw;
+    position: absolute;
+    top: 1.5vw;
+    transform: rotate(-5deg);
+    left: 2.5vw;
+}
+.next{
+    position: absolute;
+    width: 5vw;
+    transform: rotate(185deg);
+    top: 1.5vw;
+    left: 77.5vw;
+}
+
+.binder-card-wrapper {
+    width: 100%;
+    height: 100%;
+    left: 0vw;
+    top: 2.5vw;
+    position: absolute;
+}
+
+
+    .binder-card-wrapper .sum {
+        overflow: hidden;
+        left: .8vw;
+        top: 5.2vw;
+        font-size: .45vw;
+        max-width: 8.7vw;
+        position: absolute;
+    }
+
+    .binder-card-wrapper .pokemon-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start; 
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+        position: absolute;
+    }
+
+    .binder-card-wrapper .cardimg{
+        position: absolute;
+        top: -.5vw;                    
+        left: 0;
+        z-index: 1;
+        width: 10vw;
+        height: 6vw;
+        pointer-events: none;
+    }
+
+    .binder-card-wrapper .card {
+        position: absolute;
+        top: -2.4vw;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .binder-card-wrapper .pokemonname {
+        font-size: .8vw;
+        text-align: center;
+        z-index: 100;
+        position: absolute;
+        top: -1.5vw;
+        left: -.5vw;
+        width: 100%;
+        margin: 0;
+        pointer-events: none;
+    }
+
+.view-card-btn {
+    position: absolute;
+    transform: skew(-40deg);
+    border-radius: .3vw;
+    background-color: rebeccapurple;
+    color: white;
+    width: 4vw;
+    height: 1.2vw;
+    top: 10vw;
+    left: 4.9vw;
+    z-index: 50;
+}
+.view-card-icon {
+    transform: skew(40deg);
+    font-size: .8vw;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    position: relative;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal-btn {
+    position: absolute;
+    transform: skew(-40deg);
+    border-radius: .3vw;
+    background-color: rebeccapurple;
+    color: white;
+    width: 8vw;
+    height: 2.3vw;
+    top: 27.4vw;
+    left: 11vw;
+    z-index: 50;
+}
+
+.pokemon-card-wrapper-large {
+    width: 25vw;
+    height: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -39vw;
+    top: -5vw;
+}
+.close-icon {
+    transform: skew(40deg);
+    font-size: 1.5vw;
+}
+
+.finished-button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    left: 88.6vw;
+    top: 8vw;
+    z-index: 100;
+    width: 10vw;
+    height: 5.5vw;
+    cursor: pointer;
+}
+    .finished-button img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 1vw;
+        border: .2vw solid black;
+    }
