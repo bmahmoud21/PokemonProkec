@@ -68,12 +68,10 @@ function Binder() {
 
   // Handler for Finished button
   const handleFinished = () => {
-    // Clear session/localStorage
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     localStorage.removeItem("selectedPokemon");
     localStorage.removeItem("playedPokemon");
-    // Navigate to login page (First.jsx)
     navigate("/");
   };
 
