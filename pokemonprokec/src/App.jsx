@@ -1,6 +1,3 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
 import './App.css'
 import React, { useEffect, useState } from "react";
 import background from "/src/imgs/bkgrd.jpg";
@@ -17,10 +14,12 @@ function App() {
 
     const [pokemonList, setPokemonList] = useState([]);
     const [uiStates, setUiStates] = useState({});
+    const [guestPokemon, setGuestPokemon] = useState([]);
     const allCaught = pokemonList.every(pokemon => uiStates[pokemon.name]?.pokedex);
 
 
     useEffect(() => {
+        // Read from localStorage, but do NOT clear or overwrite selectedPokemon
         const selectedFromStorage = JSON.parse(localStorage.getItem('selectedPokemon')) || [];
 
         fetch("http://localhost:5255/api/pokemon")

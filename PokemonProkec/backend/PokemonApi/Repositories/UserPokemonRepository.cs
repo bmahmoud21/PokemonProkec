@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using PokemonApi.Models;
 using System.Linq;
 using PokemonApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PokemonApi.Repositories
 {
@@ -25,7 +26,9 @@ namespace PokemonApi.Repositories
 
         public async Task<IEnumerable<UserPokemon>> GetUserPokemonsAsync(int userId)
         {
-            return _context.UserPokemons.Where(up => up.UserId == userId).ToList();
+            return await _context.UserPokemons
+                .Where(up => up.UserId == userId)
+                .ToListAsync();
         }
 
         public async Task<UserPokemon> AddPokemonToUserAsync(int userId, UserPokemon userPokemon)
@@ -38,7 +41,8 @@ namespace PokemonApi.Repositories
 
         public async Task<bool> RemovePokemonFromUserAsync(int userId, int pokemonId)
         {
-            var userPokemon = _context.UserPokemons.FirstOrDefault(up => up.UserId == userId && up.PokemonId == pokemonId);
+            var userPokemon = await _context.UserPokemons
+                .FirstOrDefaultAsync(up => up.UserId == userId && up.PokemonId == pokemonId);
             if (userPokemon == null) return false;
 
             _context.UserPokemons.Remove(userPokemon);
@@ -48,8 +52,12 @@ namespace PokemonApi.Repositories
 
         public async Task<UserPokemon?> UpdateUserPokemonAsync(int userId, int pokemonId, UserPokemon updateData)
         {
-            var userPokemon = _context.UserPokemons.FirstOrDefault(up => up.UserId == userId && up.PokemonId == pokemonId);
+            var userPokemon = await _context.UserPokemons
+                .FirstOrDefaultAsync(up => up.UserId == userId && up.PokemonId == pokemonId);
             if (userPokemon == null) return null;
+
+            // Update properties as needed, e.g.:
+            // userPokemon.SomeProperty = updateData.SomeProperty;
 
             await _context.SaveChangesAsync();
             return userPokemon;

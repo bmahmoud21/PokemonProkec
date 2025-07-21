@@ -69,6 +69,25 @@ function Home() {
         }
     };
 
+    const handleGuestLogin = async () => {
+        try {
+            const response = await fetch("http://localhost:5255/api/users/guest", { method: "POST" });
+            const text = await response.text();
+            if (!response.ok) {
+                alert("Failed to create guest user.");
+                return;
+            }
+            const guestUser = JSON.parse(text);
+            localStorage.setItem("userId", guestUser.userId);
+            localStorage.setItem("token", ""); // If you use tokens, set accordingly
+            setUserId(guestUser.userId);
+            setIsAuthenticated(true);
+            setIsGuest(true);
+        } catch (error) {
+            alert("Error creating guest user.");
+        }
+    };
+
     useEffect(() => {
         const token = localStorage.getItem("token");
 
@@ -92,6 +111,31 @@ function Home() {
             .catch(err => console.error("Error loading saved Pokémon:", err));
     }, [isAuthenticated, userId]); 
 
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+        if (!userId || !token) {
+            localStorage.removeItem("selectedPokemon");
+            localStorage.removeItem("playedPokemon");
+        }
+    }, []);
+
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+        if (!userId || !token) {
+            localStorage.removeItem("selectedPokemon");
+        }
+    }, []);
+
+    useEffect(() => {
+        // If guest, clear userId and token
+        if (!localStorage.getItem("userId") || !localStorage.getItem("token")) {
+            localStorage.removeItem("userId");
+            localStorage.removeItem("token");
+            localStorage.removeItem("selectedPokemon");
+        }
+    }, []);
 
     const [pokemonList, setPokemonList] = useState([]);
     const [selectedPokemon, setSelectedPokemon] = useState([]);
@@ -102,7 +146,20 @@ function Home() {
     const pageSize = 12;
 
     useEffect(() => {
-        if (!isAuthenticated || !userId) return;
+        // Always fetch all Pokémon for guests
+        if (!isAuthenticated) {
+            fetch("http://localhost:5255/api/pokemon")
+                .then((res) => res.json())
+                .then((data) => {
+                    setPokemonList(data);
+                    setCurrentPage(0);
+                })
+                .catch((err) => console.error("Error fetching Pokemon:", err));
+            return;
+        }
+
+        // If authenticated, fetch as before
+        if (!userId) return;
 
         const url = isUsed
             ? `http://localhost:5255/api/pokemon/unused/${userId}`
@@ -112,7 +169,7 @@ function Home() {
             .then((res) => res.json())
             .then((data) => {
                 setPokemonList(data);
-                setCurrentPage(0); // Optionally reset to first page on toggle
+                setCurrentPage(0);
             })
             .catch((err) => console.error("Error fetching Pokemon:", err));
     }, [isUsed, isAuthenticated, userId]);
@@ -134,38 +191,41 @@ function Home() {
     const handleStartGame = async () => {
         if (selectedPokemon.length !== 9) return;
 
-        // Save selected Pokemon for both guests and logged-in users
         localStorage.setItem("selectedPokemon", JSON.stringify(selectedPokemon));
 
         if (isGuest) {
+            // For guests, just navigate
             navigate('/FindThatPokemon');
             return;
         }
 
-        const userId = localStorage.getItem("userId");
-        if (!userId) {
-            alert("Please log in to save your Pokémon.");
-            return;
-        }
-
+        // For authenticated users, save selection to backend
         try {
-            const res = await fetch("http://localhost:5255/api/userpokemon/select", {
+            const userId = localStorage.getItem("userId");
+            const token = localStorage.getItem("token");
+            const pokemonIds = selectedPokemon.map(p => p.id);
+
+            const response = await fetch("http://localhost:5255/api/userpokemon/select", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
                 body: JSON.stringify({
-                    userId: parseInt(userId),
-                    pokemonIds: selectedPokemon.map(p => p.id),
-                }),
+                    userId,
+                    pokemonIds
+                })
             });
 
-            if (!res.ok) throw new Error("Failed to save selection");
+            if (!response.ok) {
+                alert("Failed to save selected Pokémon.");
+                return;
+            }
 
-            // Already saved above
+            // After saving, navigate to FindThatPokemon
             navigate('/FindThatPokemon');
-
-        } catch (err) {
-            console.error(err);
-            alert("Unable to save your selection.");
+        } catch (error) {
+            alert("Error saving selected Pokémon.");
         }
     };
 
@@ -182,10 +242,7 @@ function Home() {
                                         handleLoginOrSignup("register", username, password)
                                     }
                                     onSwitchToLogin={() => setShowRegister(false)}
-                                    onGuest={() => {
-                                        setIsAuthenticated(true);
-                                        setIsGuest(true);
-                                    }}
+                                    onGuest={handleGuestLogin}
                                 />
                             ) : (
                                 <Login
@@ -193,10 +250,7 @@ function Home() {
                                         handleLoginOrSignup("login", username, password)
                                     }
                                     onSwitchToRegister={() => setShowRegister(true)}
-                                    onGuest={() => {
-                                        setIsAuthenticated(true);
-                                        setIsGuest(true);
-                                    }}
+                                    onGuest={handleGuestLogin}
                                 />
                             )}
                         </div>

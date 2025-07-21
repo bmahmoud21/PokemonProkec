@@ -46,5 +46,10 @@ namespace PokemonApi.Services
             var allPokemons = await _pokemonRepository.GetAllPokemonsAsync();
             return allPokemons.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
+
+        public async Task<IEnumerable<Pokemon>> GetPokemonsByIdsAsync(IEnumerable<int> ids)
+        {
+            return await _pokemonRepository.GetPokemonsByIdsAsync(ids);
+        }
     }
 }

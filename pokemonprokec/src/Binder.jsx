@@ -12,24 +12,49 @@ const pageSize = 12;
 function Binder() {
   const [userPokemons, setUserPokemons] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [modalPokemon, setModalPokemon] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
+    console.log("Binder.jsx userId:", userId, "token:", token);
 
-    if (!userId || !token) {
-      // Guest
-      const selected = JSON.parse(localStorage.getItem("selectedPokemon")) || [];
-      setUserPokemons(selected);
-    } else {
-      // user
+    if (userId && token) {
+      // user path
+      console.log("Binder.jsx: using user path");
       fetch(`http://localhost:5255/api/userpokemon/all/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
         .then(data => setUserPokemons(data))
         .catch(() => setUserPokemons([]));
+    } else {
+      // guest path
+      console.log("Binder.jsx: using guest path");
+      const selected = JSON.parse(localStorage.getItem("selectedPokemon")) || [];
+      console.log("selectedPokemon from localStorage:", selected);
+      if (!selected.length) {
+        setUserPokemons([]);
+        return;
+      }
+      const selectedIds = selected.map(p => p.id);
+      console.log("selectedIds to send to API:", selectedIds);
+
+      fetch("http://localhost:5255/api/pokemon/byIds", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(selectedIds)
+      })
+        .then(res => res.json())
+        .then(filtered => {
+          console.log("API returned:", filtered);
+          setUserPokemons(filtered);
+        })
+        .catch((err) => {
+          console.error("API error:", err);
+          setUserPokemons([]);
+        });
     }
   }, []);
 
@@ -41,11 +66,22 @@ function Binder() {
   const maxPage = Math.ceil(uniqueUserPokemons.length / pageSize) - 1;
   const paginatedPokemon = uniqueUserPokemons.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
 
+  // Handler for Finished button
+  const handleFinished = () => {
+    // Clear session/localStorage
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    localStorage.removeItem("selectedPokemon");
+    localStorage.removeItem("playedPokemon");
+    // Navigate to login page (First.jsx)
+    navigate("/");
+  };
+
   return (
     <div className="background">
       <button
         className="homebutton"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/FindThatPokemon")}
         title="Go Home"
       >
         <img
@@ -65,6 +101,12 @@ function Binder() {
             {pokemon && (
               <div className="binder-card-wrapper">
                 <PokemonCard pokemon={pokemon} />
+                <button
+                  className="view-card-btn"
+                  onClick={() => setModalPokemon(pokemon)}
+                >
+                  <div className="view-card-icon"> View </div>
+                </button>
               </div>
             )}
           </div>
@@ -85,6 +127,32 @@ function Binder() {
       >
         <img src="./src/imgs/Arrow.png" className="next" alt="Next" />
       </button>
+
+      <button
+        className="finished-button"
+        onClick={handleFinished}
+      >
+        <img src="src/imgs/endgame.png" alt="End Game" />
+      </button>
+
+      {modalPokemon && (
+        <div className="modal-overlay" onClick={() => setModalPokemon(null)}>
+          <div
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="close-modal-btn"
+              onClick={() => setModalPokemon(null)}
+            >
+              <div className="close-icon"> Close </div>
+            </button>
+            <div className="pokemon-card-wrapper-large">
+              <PokemonCard pokemon={modalPokemon} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

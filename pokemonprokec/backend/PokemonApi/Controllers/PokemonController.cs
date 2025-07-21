@@ -94,6 +94,16 @@ namespace PokemonApi.Controllers
             return CreatedAtAction("GetPokemon", new { id = created.Id }, created);
         }
 
+        [HttpPost("byIds")]
+        public async Task<ActionResult<IEnumerable<Pokemon>>> GetPokemonsByIds([FromBody] List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return BadRequest("No IDs provided.");
+
+            var selectedPokemons = await _pokemonService.GetPokemonsByIdsAsync(ids);
+            return Ok(selectedPokemons);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPokemon(int id, Pokemon pokemon)
         {

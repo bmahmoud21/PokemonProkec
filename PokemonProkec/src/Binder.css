@@ -236,21 +236,19 @@ body {
 .binder-card-wrapper {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
-    overflow: hidden;
     left: 0vw;
-    top: 0vw;
+    top: 2.5vw;
+    position: absolute;
 }
 
 
     .binder-card-wrapper .sum {
         overflow: hidden;
         left: .8vw;
-        top: 7.4vw;
+        top: 5.2vw;
         font-size: .45vw;
         max-width: 8.7vw;
+        position: absolute;
     }
 
     .binder-card-wrapper .pokemon-card {
@@ -265,25 +263,22 @@ body {
         margin: 0 !important;
         padding: 0 !important;
         box-sizing: border-box;
-        position: relative;
+        position: absolute;
     }
 
-    .binder-card-wrapper .cardimg {
-        align-self: center;
-        height: 30vw !important;   
-        width: 100% !important;
-        object-fit: contain;
-        display: block;
+    .binder-card-wrapper .cardimg{
         position: absolute;
-        top: -10.5vw;
+        top: -.5vw;                    
         left: 0;
         z-index: 1;
+        width: 10vw;
+        height: 6vw;
         pointer-events: none;
     }
 
     .binder-card-wrapper .card {
         position: absolute;
-        top: 0;
+        top: -2.4vw;
         left: 0;
         width: 100% !important;
         height: 100% !important;
@@ -292,11 +287,104 @@ body {
     }
 
     .binder-card-wrapper .pokemonname {
-        font-size: 10vw;
-        color: #fff;
+        font-size: .8vw;
         text-align: center;
-        z-index: 10;
-        position: relative;
-        margin: 0.2vw 0 0.1vw 0;
-        text-shadow: 0 0 0.3vw #000, 0 0 0.5vw #000;
+        z-index: 100;
+        position: absolute;
+        top: -1.5vw;
+        left: -.5vw;
+        width: 100%;
+        margin: 0;
+        pointer-events: none;
+    }
+
+.view-card-btn {
+    position: absolute;
+    transform: skew(-40deg);
+    border-radius: .3vw;
+    background-color: rebeccapurple;
+    color: white;
+    width: 4vw;
+    height: 1.2vw;
+    top: 10vw;
+    left: 4.9vw;
+    z-index: 50;
+}
+.view-card-icon {
+    transform: skew(40deg);
+    font-size: .8vw;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    position: relative;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal-btn {
+    position: absolute;
+    transform: skew(-40deg);
+    border-radius: .3vw;
+    background-color: rebeccapurple;
+    color: white;
+    width: 8vw;
+    height: 2.3vw;
+    top: 27.4vw;
+    left: 11vw;
+    z-index: 50;
+}
+
+.pokemon-card-wrapper-large {
+    width: 25vw;
+    height: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -39vw;
+    top: -5vw;
+}
+.close-icon {
+    transform: skew(40deg);
+    font-size: 1.5vw;
+}
+
+.finished-button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    left: 88.6vw;
+    top: 8vw;
+    z-index: 100;
+    width: 10vw;
+    height: 5.5vw;
+    cursor: pointer;
+}
+    .finished-button img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 1vw;
+        border: .2vw solid black;
     }

@@ -14,6 +14,7 @@ namespace PokemonApi.Repositories
         Task<Pokemon> CreatePokemonAsync(Pokemon pokemon);
         Task<Pokemon?> UpdatePokemonAsync(int id, Pokemon pokemon);
         Task<bool> DeletePokemonAsync(int id);
+        Task<IEnumerable<Pokemon>> GetPokemonsByIdsAsync(IEnumerable<int> ids);
     }
 
     public class PokemonRepository : IPokemonRepository
@@ -65,6 +66,11 @@ namespace PokemonApi.Repositories
             _context.Pokemon.Remove(pokemon);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<IEnumerable<Pokemon>> GetPokemonsByIdsAsync(IEnumerable<int> ids)
+        {
+            return await _context.Pokemon.Where(p => ids.Contains(p.Id)).ToListAsync();
         }
     }
 }
